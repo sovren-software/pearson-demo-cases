@@ -1,5 +1,8 @@
 # Pearson — synthetic H-1B case files
 
+[![validate](https://github.com/sovren-software/pearson-demo-cases/actions/workflows/validate.yml/badge.svg)](https://github.com/sovren-software/pearson-demo-cases/actions/workflows/validate.yml)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+
 **A high-quality, fully synthetic corpus of U.S. H-1B immigration cases — for building, testing, and benchmarking document-intake and case-integrity systems.**
 
 Most legal-AI demos run on one tidy happy-path packet. Real intake is messy: clients over-share, contradict their own documents, forget the LCA, and send a passport that expires mid-petition. **Pearson** is the corpus that exercises all of it — clean cases, adversarial contradiction traps, incomplete packets, materiality/change-impact fixtures, and status-clock deadline math — each with a machine-checkable answer key and a runnable reference validator.
