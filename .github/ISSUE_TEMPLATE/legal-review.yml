@@ -1,0 +1,56 @@
+name: "⚖️ Legal review / case correction"
+description: "Tell us where a case's legal claim is wrong, or where a document looks unrealistic. No coding needed."
+title: "[legal] "
+labels: ["legal-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you — practicing-attorney review is the contribution that makes this corpus trustworthy.
+        See **[REVIEW-GUIDE.md](../blob/main/REVIEW-GUIDE.md)** for what to check.
+        All cases are fictional/synthetic; nothing here is legal advice and submitting this creates no attorney–client relationship.
+  - type: dropdown
+    id: corpus
+    attributes:
+      label: Which area are you reviewing?
+      options:
+        - "Contradiction gate (cases/h1b-adversarial)"
+        - "Change-impact / materiality (cases/h1b-materiality)"
+        - "Deadline math / status-clock (cases/h1b-statusclock)"
+        - "Document realism (cases/h1b)"
+        - "Missing coverage (a case we should add)"
+        - "Other"
+    validations:
+      required: true
+  - type: input
+    id: case
+    attributes:
+      label: Case (folder name or id)
+      placeholder: "cases/h1b-adversarial/soc-code-mismatch"
+  - type: textarea
+    id: issue
+    attributes:
+      label: What's wrong — and what's correct?
+      description: "In plain language: what would a competent immigration attorney actually do here?"
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: "Correct severity (for a contradiction/error case)"
+      options:
+        - "— not applicable"
+        - "blocker (cannot file)"
+        - "denial"
+        - "RFE"
+        - "no issue / not material"
+  - type: textarea
+    id: basis
+    attributes:
+      label: Legal basis / citation (optional)
+      description: "A statute, regulation, AAO decision, or Policy Manual cite if handy — but your practical judgment is valuable on its own."
+  - type: input
+    id: credit
+    attributes:
+      label: Credit
+      description: 'A name/handle to credit you, or write "anonymous".'

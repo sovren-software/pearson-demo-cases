@@ -1,6 +1,11 @@
 # Contributing to Pearson
 
-Thanks for helping grow the corpus. The one rule: **every case ships with a machine-checkable answer key, and `validator/validate.py all` must stay green.**
+Thanks for helping grow the corpus. There are **two ways to contribute**:
+
+- **⚖️ Legal review (no code).** You're an immigration attorney or paralegal and you can tell us whether a contradiction, a verdict, a severity, or a deadline is *legally correct* — or whether a synthetic document looks realistic. **This is the contribution we most need.** Start with **[REVIEW-GUIDE.md](REVIEW-GUIDE.md)** and open a "Legal review" issue. You do not need any of the engineering steps below.
+- **🛠️ Corpus / code.** You're adding or editing cases, the generator, or the validator. Follow the rest of this file.
+
+The one rule for the code track: **every case ships with a machine-checkable answer key, and `validator/validate.py all` must stay green.**
 
 ## Ground rules
 

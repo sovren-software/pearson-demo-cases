@@ -11,6 +11,19 @@ Inspired by the open-source legal-AI work at [mikeoss.com](https://mikeoss.com).
 
 ---
 
+## Who this is for — and how you can help
+
+This corpus has two audiences:
+
+- **Engineers** building or benchmarking document-intake, extraction, and case-integrity systems — use the cases as fixtures and `validate.py` as a conformance check.
+- **Immigration attorneys & paralegals** — *you are the contributors we most need.* Every contradiction this corpus flags, every "amendment required" verdict, and every six-year-clock calculation is **a claim about U.S. immigration law**. We want practicing experts to tell us where we're right, where we're wrong, and what we're missing.
+
+**You do not need to write code to help.** If you can read a case and say *"that's a denial, not an RFE"* or *"a real offer letter wouldn't print the SOC code"* (an actual attorney correction we've already applied), you can improve this corpus.
+
+👉 **Attorneys / legal reviewers — start with [REVIEW-GUIDE.md](REVIEW-GUIDE.md):** a plain-language walkthrough of exactly what to check and how to send feedback. No coding required; opening a GitHub issue is enough. You can even point ChatGPT or Codex at this repository and ask it to help you navigate the cases and draft your feedback.
+
+---
+
 ## What's in the box
 
 **37 cases across 5 corpora**, plus a generator and a stdlib-only reference validator.
