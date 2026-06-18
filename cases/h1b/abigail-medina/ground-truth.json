@@ -1,0 +1,64 @@
+{
+  "_note": "Expected extraction values for the Pearson H-1B demo accuracy check. Fictional / synthetic — no real PII.",
+  "scenario": "Foreign degree + credential evaluation; TN to H-1B.",
+  "persona": "abigail-medina",
+  "beneficiary_from_passport": {
+    "beneficiary_full_name": "ABIGAIL MEDINA PEREZ",
+    "beneficiary_dob": "1981-01-17",
+    "beneficiary_country_of_citizenship": "MEX",
+    "passport_number": "G14820073",
+    "passport_expiration": "2032-06-11"
+  },
+  "employment_from_offer_letter": {
+    "petitioner_legal_name": "BrightForge Manufacturing Co.",
+    "petitioner_ein": "91-3047821",
+    "petitioner_address": "1400 Rosa Parks Blvd, Detroit, MI 48216",
+    "job_title": "Mechanical Engineer",
+    "soc_code": "17-2141",
+    "annual_wage_usd": 108000,
+    "worksite_address": "1400 Rosa Parks Blvd, Detroit, MI 48216",
+    "requested_start_date": "2026-10-15",
+    "requested_end_date": "2029-10-14",
+    "requested_status": "H-1B"
+  },
+  "status_from_i94": {
+    "i94_number": "55512340987",
+    "current_nonimmigrant_status": "TN"
+  },
+  "education_from_degree": {
+    "beneficiary_degree": "Bachelor of Science",
+    "degree_field": "Mechanical Engineering"
+  },
+  "mrz": {
+    "line1": "P<MEXMEDINA<PEREZ<<ABIGAIL<<<<<<<<<<<<<<<<<<",
+    "line2": "G148200735MEX8101176F3206113<<<<<<<<<<<<<<02"
+  },
+  "material_change_email": {
+    "type": "job_title",
+    "subject": "Promotion / role change — Abigail Medina-Perez",
+    "body": "Quick update before filing: Abigail Medina-Perez is being promoted from Mechanical Engineer to Senior Mechanical Engineer, taking on design-lead responsibilities for our drivetrain program. Her base salary stays at $108,000. Does the higher-level title change anything for the H-1B? — Karen Whitfield, BrightForge.",
+    "changed": {
+      "job_title": "Senior Mechanical Engineer"
+    }
+  },
+  "extra_documents": [
+    {
+      "file": "resume.pdf",
+      "kind": "resume",
+      "required": false,
+      "description": "Candidate résumé / CV (2 pages; over-shared, not required for I-129)"
+    },
+    {
+      "file": "transcript.pdf",
+      "kind": "transcript",
+      "required": false,
+      "description": "Academic transcript (over-shared alongside the degree, not required)"
+    },
+    {
+      "file": "tn-approval.pdf",
+      "kind": "tn-approval",
+      "required": false,
+      "description": "Prior TN admission record (status history, not required)"
+    }
+  ]
+}

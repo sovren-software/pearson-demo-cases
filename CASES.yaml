@@ -1,0 +1,95 @@
+# Pearson corpus-cases manifest — single source of truth for the synthetic H-1B corpus.
+#
+# This index mirrors what generator/generate_cases.py produces; every case's
+# persona/base_persona is ALSO carried in-band in its own ground-truth.json so tools
+# can resolve the link without this file. Keep the two in sync when adding a case.
+#
+# All data is synthetic — no real PII. Passports are watermarked SPECIMEN.
+
+# ── Naming conventions (the system) ─────────────────────────────────────────────
+naming:
+  persona_slug: "given-family, kebab-case (e.g. arjun-kumar). The happy-path folder IS the slug."
+  adversarial:  "folder name == the validation GATE it proves (kebab of the gate's snake_case name)."
+  incomplete:   "folder name == the missing artifact (missing-<thing>)."
+  fixtures:     "materiality & statusclock are a single cases.json keyed by rule/scenario id (no persona, no folders)."
+  link:         "scenario corpora record their base persona in ground-truth.json -> base_persona; happy records -> persona."
+
+# ── Personas (the demo cast) ────────────────────────────────────────────────────
+personas:
+  - slug: arjun-kumar
+    display: "Arjun Kumar"
+    nationality: IND
+    scenario: "Cap-subject new hire; F-1 OPT -> H-1B; US STEM master's"
+    act2_change: "compensation -> wage / new LCA"
+  - slug: yangben-zhengjian
+    display: "Yangben Zhengjian"
+    nationality: CHN
+    scenario: "H-1B transfer / portability (currently in H-1B)"
+    act2_change: "worksite relocation -> new LCA + amended petition (Matter of Simeio Solutions)"
+  - slug: abigail-medina
+    display: "Abigail Medina Perez"
+    nationality: MEX
+    scenario: "Foreign degree + credential evaluation; TN -> H-1B"
+    act2_change: "promotion / role change -> specialty-occupation re-test"
+
+# ── Corpora ─────────────────────────────────────────────────────────────────────
+corpora:
+  happy:
+    dir: cases/h1b
+    proves: "clean docs extract correctly -> facts -> auto-filled I-129 (+ graceful over-shared docs)"
+    runner: "python validator/validate.py integrity"
+    cases:                       # the persona IS the case
+      - {slug: arjun-kumar,       persona: arjun-kumar}
+      - {slug: yangben-zhengjian, persona: yangben-zhengjian}
+      - {slug: abigail-medina,    persona: abigail-medina}
+
+  adversarial:
+    dir: cases/h1b-adversarial
+    proves: "cross-document contradiction gates — one injected defect per case; folder == the gate"
+    spec: cases/h1b-adversarial/VALIDATION-SPEC.md
+    runner: "python validator/validate.py adversarial (deterministic, offline)"
+    cases:
+      - {slug: wage-below-prevailing,          base_persona: arjun-kumar,       gate: wage_below_prevailing,          severity: denial,  cross_doc: true}
+      - {slug: identity-name-mismatch,         base_persona: arjun-kumar,       gate: identity_name_mismatch,         severity: rfe,     cross_doc: true}
+      - {slug: soc-code-mismatch,              base_persona: yangben-zhengjian, gate: soc_code_mismatch,              severity: rfe,     cross_doc: true}
+      - {slug: worksite-outside-lca-area,      base_persona: yangben-zhengjian, gate: worksite_outside_lca_area,      severity: rfe,     cross_doc: true}
+      - {slug: employer-name-mismatch,         base_persona: arjun-kumar,       gate: employer_name_mismatch,         severity: rfe,     cross_doc: true}
+      - {slug: employer-ein-mismatch,          base_persona: yangben-zhengjian, gate: employer_ein_mismatch,          severity: rfe,     cross_doc: true}
+      - {slug: passport-expired-before-period, base_persona: abigail-medina,    gate: passport_expired_before_period, severity: blocker, cross_doc: false}
+      - {slug: mrz-checkdigit-corrupt,         base_persona: arjun-kumar,       gate: mrz_checkdigit_corrupt,         severity: rfe,     cross_doc: false}
+
+  incomplete:
+    dir: cases/h1b-incomplete
+    proves: "completeness gates — one required document/field MISSING; folder == the missing artifact"
+    runner: "python validator/validate.py incomplete (deterministic, offline)"
+    cases:
+      - {slug: missing-lca,    base_persona: yangben-zhengjian, gate: missing_required_document, severity: blocker, missing: "certified LCA (ETA-9035)"}
+      - {slug: missing-degree, base_persona: abigail-medina,    gate: missing_required_document, severity: blocker, missing: "degree / credential evaluation"}
+      - {slug: missing-i94,    base_persona: arjun-kumar,       gate: missing_required_document, severity: blocker, missing: "I-94 record"}
+      - {slug: missing-wage,   base_persona: arjun-kumar,       gate: missing_required_field,    severity: rfe,     missing: "annualized salary on the offer"}
+
+  materiality:
+    dir: cases/h1b-materiality
+    file: cases.json
+    proves: "change -> impact verdicts (14 materiality rules + boundary pairs + 2 engine-safety boundaries)"
+    runner: "python validator/validate.py materiality (deterministic, offline)"
+    persona: none                # JSON fixtures keyed by rule id, no documents
+    count: 17
+
+  statusclock:
+    dir: cases/h1b-statusclock
+    file: cases.json
+    proves: "H/L-1 6-year max-out + day recapture + clock reset deadline math"
+    runner: "python validator/validate.py statusclock (deterministic, offline)"
+    persona: none
+    count: 5
+    status: pending-attorney-validation   # answers hand-computed; re-surface to the design partner
+
+# ── Per-case document layout (happy / adversarial / incomplete) ─────────────────
+case_layout:
+  required:  [passport.png, offer.pdf, lca.pdf, i94.pdf, degree.pdf, support-letter.pdf]
+  answer_key: ground-truth.json   # expected facts; adversarial adds defect+expected_gates; incomplete adds documents_missing
+  render_sources: _src/*.html     # diffable generator inputs the PDFs render from (a client never sends HTML)
+  extras: "happy cases also carry over-shared docs (resume/paystub/etc.) marked required:false"
+
+regenerate: "python3 generator/generate_cases.py   # needs: imagemagick, libreoffice, python3, Noto fonts"

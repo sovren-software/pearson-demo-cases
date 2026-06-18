@@ -1,0 +1,52 @@
+{
+  "_note": "ADVERSARIAL fixture for the Pearson H-1B intake validation suite. One injected defect per case. Fictional / synthetic — no real PII. A case PASSES only when the named expected gate fires (not merely 'some' gate).",
+  "defect": "passport_expired_before_period",
+  "base_persona": "abigail-medina",
+  "scenario": "Foreign degree + credential evaluation; TN to H-1B.",
+  "beneficiary_from_passport": {
+    "beneficiary_full_name": "ABIGAIL MEDINA PEREZ",
+    "beneficiary_dob": "1981-01-17",
+    "beneficiary_country_of_citizenship": "MEX",
+    "passport_number": "G14820073",
+    "passport_expiration": "2026-09-30"
+  },
+  "employment_from_offer_letter": {
+    "petitioner_legal_name": "BrightForge Manufacturing Co.",
+    "job_title": "Mechanical Engineer",
+    "soc_code": "17-2141",
+    "annual_wage_usd": 108000,
+    "worksite_address": "1400 Rosa Parks Blvd, Detroit, MI 48216",
+    "requested_start_date": "2026-10-15",
+    "requested_end_date": "2029-10-14"
+  },
+  "status_from_i94": {
+    "i94_number": "55512340987",
+    "current_nonimmigrant_status": "TN"
+  },
+  "education_from_degree": {
+    "beneficiary_degree": "Bachelor of Science",
+    "degree_field": "Mechanical Engineering"
+  },
+  "mrz": {
+    "line1": "P<MEXMEDINA<PEREZ<<ABIGAIL<<<<<<<<<<<<<<<<<<",
+    "line2": "G148200735MEX8101176F2609304<<<<<<<<<<<<<<04"
+  },
+  "expected_gates": [
+    {
+      "gate": "passport_expired_before_period",
+      "category": "passport-validity",
+      "detects": "passport expires 2026-09-30, before the requested employment period (2026-10-15 → 2029-10-14)",
+      "documents": [
+        "passport"
+      ],
+      "cross_document": false,
+      "severity": "blocker",
+      "affected_form": "passport",
+      "why": "An expired/expiring passport blocks admissibility and consular processing for the requested period.",
+      "evidence": {
+        "passport_expiration": "2026-09-30",
+        "requested_start_date": "2026-10-15"
+      }
+    }
+  ]
+}

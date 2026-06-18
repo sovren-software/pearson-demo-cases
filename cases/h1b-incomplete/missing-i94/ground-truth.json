@@ -1,0 +1,98 @@
+{
+  "_note": "INCOMPLETE ('not-enough') fixture for the Pearson H-1B intake-completeness suite. Exactly one required document or field is MISSING. Fictional / synthetic — no real PII. A case PASSES only when the named completeness gate fires.",
+  "defect": "missing_required_document",
+  "base_persona": "arjun-kumar",
+  "scenario": "Cap-subject new hire; F-1 OPT to H-1B; US STEM master's.  (intake incomplete — missing i94)",
+  "documents_present": [
+    "passport",
+    "offer",
+    "lca",
+    "degree"
+  ],
+  "documents_missing": [
+    "i94"
+  ],
+  "facts": [
+    {
+      "predicate": "passport_number",
+      "value": "P8401723",
+      "source_kind": "passport"
+    },
+    {
+      "predicate": "beneficiary_full_name",
+      "value": "ARJUN KUMAR",
+      "source_kind": "passport"
+    },
+    {
+      "predicate": "passport_expiration",
+      "value": "2031-06-14",
+      "source_kind": "passport"
+    },
+    {
+      "predicate": "annual_wage_usd",
+      "value": 142000,
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "soc_code",
+      "value": "15-2051",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "job_title",
+      "value": "Senior Data Scientist",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "worksite_address",
+      "value": "500 Technology Drive, Suite 400, Austin, TX 78701",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "requested_start_date",
+      "value": "2026-10-01",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "beneficiary_full_name",
+      "value": "ARJUN KUMAR",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "prevailing_wage",
+      "value": 131019,
+      "source_kind": "lca"
+    },
+    {
+      "predicate": "soc_code",
+      "value": "15-2051",
+      "source_kind": "lca"
+    },
+    {
+      "predicate": "worksite_address",
+      "value": "500 Technology Drive, Suite 400, Austin, TX 78701",
+      "source_kind": "lca"
+    },
+    {
+      "predicate": "beneficiary_degree",
+      "value": "Master of Science",
+      "source_kind": "degree"
+    },
+    {
+      "predicate": "degree_field",
+      "value": "Computer Science",
+      "source_kind": "degree"
+    }
+  ],
+  "expected_gates": [
+    {
+      "gate": "missing_required_document",
+      "category": "intake-completeness",
+      "missing_kind": "i94",
+      "severity": "blocker",
+      "detects": "no I-94 record in the packet — current nonimmigrant status and change-of-status eligibility cannot be verified",
+      "affected_form": "I-129 Part 2",
+      "why": "The I-94 establishes the beneficiary's current status and admission period, required for the change/extension of status request."
+    }
+  ]
+}

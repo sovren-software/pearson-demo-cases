@@ -1,0 +1,68 @@
+{
+  "_note": "Expected extraction values for the Pearson H-1B demo accuracy check. Fictional / synthetic — no real PII.",
+  "scenario": "H-1B transfer / portability (currently in H-1B with another employer).",
+  "persona": "yangben-zhengjian",
+  "beneficiary_from_passport": {
+    "beneficiary_full_name": "YANGBEN ZHENGJIAN",
+    "beneficiary_dob": "1985-03-20",
+    "beneficiary_country_of_citizenship": "CHN",
+    "passport_number": "EF1260892",
+    "passport_expiration": "2029-01-17"
+  },
+  "employment_from_offer_letter": {
+    "petitioner_legal_name": "Cascade Robotics, LLC",
+    "petitioner_ein": "84-2910736",
+    "petitioner_address": "2200 6th Avenue, Seattle, WA 98121",
+    "job_title": "Data Engineer",
+    "soc_code": "15-1243",
+    "annual_wage_usd": 138000,
+    "worksite_address": "2200 6th Avenue, Seattle, WA 98121",
+    "requested_start_date": "2026-11-01",
+    "requested_end_date": "2029-10-31",
+    "requested_status": "H-1B"
+  },
+  "status_from_i94": {
+    "i94_number": "98765432100",
+    "current_nonimmigrant_status": "H-1B"
+  },
+  "education_from_degree": {
+    "beneficiary_degree": "Master of Science",
+    "degree_field": "Computer Engineering"
+  },
+  "mrz": {
+    "line1": "P<CHNZHENGJIAN<<YANGBEN<<<<<<<<<<<<<<<<<<<<<",
+    "line2": "EF12608921CHN8503208F2901178<<<<<<<<<<<<<<04"
+  },
+  "material_change_email": {
+    "type": "worksite",
+    "subject": "Office relocation — Yangben Zhengjian worksite change",
+    "body": "Heads up: Cascade Robotics is relocating the engineering team. Yangben Zhengjian's primary worksite will move from 2200 6th Avenue, Seattle, WA 98121 to 10500 NE 8th Street, Suite 1400, Bellevue, WA 98004, effective the first month of employment. Let me know what we need for the petition. — Marta Ruiz, Cascade Robotics.",
+    "changed": {
+      "worksite_address": "10500 NE 8th Street, Suite 1400, Bellevue, WA 98004"
+    }
+  },
+  "extra_documents": [
+    {
+      "file": "resume.pdf",
+      "kind": "resume",
+      "required": false,
+      "description": "Candidate résumé / CV (2 pages; over-shared, not required for I-129)"
+    },
+    {
+      "file": "i797-prior.pdf",
+      "kind": "i797-prior",
+      "required": false,
+      "description": "Prior I-797C H-1B approval notice (supports portability, not required)"
+    },
+    {
+      "file": "paystub.pdf",
+      "kind": "paystub",
+      "required": false,
+      "description": "Recent pay stub from current employer (over-shared, not required)"
+    }
+  ],
+  "prior_approval": {
+    "receipt": "EAC2590012345",
+    "prior_employer": "Meridian Software Corp"
+  }
+}

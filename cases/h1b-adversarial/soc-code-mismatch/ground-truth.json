@@ -1,0 +1,53 @@
+{
+  "_note": "ADVERSARIAL fixture for the Pearson H-1B intake validation suite. One injected defect per case. Fictional / synthetic — no real PII. A case PASSES only when the named expected gate fires (not merely 'some' gate).",
+  "defect": "soc_code_mismatch",
+  "base_persona": "yangben-zhengjian",
+  "scenario": "H-1B transfer / portability (currently in H-1B with another employer).",
+  "beneficiary_from_passport": {
+    "beneficiary_full_name": "YANGBEN ZHENGJIAN",
+    "beneficiary_dob": "1985-03-20",
+    "beneficiary_country_of_citizenship": "CHN",
+    "passport_number": "EF1260892",
+    "passport_expiration": "2029-01-17"
+  },
+  "employment_from_offer_letter": {
+    "petitioner_legal_name": "Cascade Robotics, LLC",
+    "job_title": "Data Engineer",
+    "soc_code": "15-1243",
+    "annual_wage_usd": 138000,
+    "worksite_address": "2200 6th Avenue, Seattle, WA 98121",
+    "requested_start_date": "2026-11-01",
+    "requested_end_date": "2029-10-31"
+  },
+  "status_from_i94": {
+    "i94_number": "98765432100",
+    "current_nonimmigrant_status": "H-1B"
+  },
+  "education_from_degree": {
+    "beneficiary_degree": "Master of Science",
+    "degree_field": "Computer Engineering"
+  },
+  "mrz": {
+    "line1": "P<CHNZHENGJIAN<<YANGBEN<<<<<<<<<<<<<<<<<<<<<",
+    "line2": "EF12608921CHN8503208F2901178<<<<<<<<<<<<<<04"
+  },
+  "expected_gates": [
+    {
+      "gate": "soc_code_mismatch",
+      "category": "lca-correspondence",
+      "detects": "SOC code on the LCA (15-1252) does not correspond to the offer/petition occupation (15-1243)",
+      "documents": [
+        "offer",
+        "lca"
+      ],
+      "cross_document": true,
+      "severity": "rfe",
+      "affected_form": "I-129 + LCA",
+      "why": "The LCA must correspond to the petition; SOC misclassification is a leading RFE/denial cause.",
+      "evidence": {
+        "offer_soc_code": "15-1243",
+        "lca_soc_code": "15-1252"
+      }
+    }
+  ]
+}

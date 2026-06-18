@@ -1,0 +1,67 @@
+{
+  "_comment": "Status-clock (H/L max-out + recapture) regression corpus. Answers are hand-computed and PENDING ATTORNEY VALIDATION. Plus a few extra cases. as_of is the deterministic 'today'.",
+  "as_of": "2024-06-01",
+  "cases": [
+    {
+      "id": "plain-6yr-no-travel",
+      "periods": [{ "classification": "H1B", "start": "2020-10-01", "end": "2023-09-30" }],
+      "travel": [],
+      "expect": {
+        "base_max_out": "2026-10-01",
+        "adjusted_max_out": "2026-10-01",
+        "recaptured_days": 0,
+        "reset": false,
+        "advisory_codes": ["ac21_extension_may_apply"]
+      }
+    },
+    {
+      "id": "recapture-30-day-trip",
+      "periods": [{ "classification": "H1B", "start": "2020-10-01", "end": "2023-09-30" }],
+      "travel": [{ "departed": "2021-06-01", "returned": "2021-07-01" }],
+      "expect": {
+        "base_max_out": "2026-10-01",
+        "adjusted_max_out": "2026-10-31",
+        "recaptured_days": 30,
+        "reset": false
+      }
+    },
+    {
+      "id": "l1-time-counts-earliest-start",
+      "periods": [
+        { "classification": "L1B", "start": "2018-01-01", "end": "2021-01-01" },
+        { "classification": "H1B", "start": "2021-02-01", "end": "2024-01-31" }
+      ],
+      "travel": [],
+      "expect": {
+        "base_max_out": "2024-01-01",
+        "adjusted_max_out": "2024-01-01",
+        "recaptured_days": 0,
+        "reset": false
+      }
+    },
+    {
+      "id": "one-year-absence-resets-clock",
+      "periods": [
+        { "classification": "H1B", "start": "2015-01-01", "end": "2018-01-01" },
+        { "classification": "H1B", "start": "2020-06-01", "end": "2023-05-31" }
+      ],
+      "travel": [{ "departed": "2018-06-01", "returned": "2019-07-15" }],
+      "expect": {
+        "base_max_out": "2026-06-01",
+        "recaptured_days": 0,
+        "reset": true,
+        "advisory_codes": ["clock_reset_abroad", "ac21_extension_may_apply"]
+      }
+    },
+    {
+      "id": "leap-day-start-clamps",
+      "periods": [{ "classification": "H1B", "start": "2020-02-29", "end": "2023-02-28" }],
+      "travel": [],
+      "expect": {
+        "base_max_out": "2026-02-28",
+        "adjusted_max_out": "2026-02-28",
+        "recaptured_days": 0
+      }
+    }
+  ]
+}

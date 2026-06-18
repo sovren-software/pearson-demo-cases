@@ -1,0 +1,102 @@
+{
+  "_note": "INCOMPLETE ('not-enough') fixture for the Pearson H-1B intake-completeness suite. Exactly one required document or field is MISSING. Fictional / synthetic — no real PII. A case PASSES only when the named completeness gate fires.",
+  "defect": "missing_required_field",
+  "base_persona": "arjun-kumar",
+  "scenario": "Cap-subject new hire; F-1 OPT to H-1B; US STEM master's.  (intake incomplete — missing annual_wage_usd (field))",
+  "documents_present": [
+    "passport",
+    "offer",
+    "lca",
+    "i94",
+    "degree"
+  ],
+  "documents_missing": [],
+  "facts": [
+    {
+      "predicate": "passport_number",
+      "value": "P8401723",
+      "source_kind": "passport"
+    },
+    {
+      "predicate": "beneficiary_full_name",
+      "value": "ARJUN KUMAR",
+      "source_kind": "passport"
+    },
+    {
+      "predicate": "passport_expiration",
+      "value": "2031-06-14",
+      "source_kind": "passport"
+    },
+    {
+      "predicate": "soc_code",
+      "value": "15-2051",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "job_title",
+      "value": "Senior Data Scientist",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "worksite_address",
+      "value": "500 Technology Drive, Suite 400, Austin, TX 78701",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "requested_start_date",
+      "value": "2026-10-01",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "beneficiary_full_name",
+      "value": "ARJUN KUMAR",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "prevailing_wage",
+      "value": 131019,
+      "source_kind": "lca"
+    },
+    {
+      "predicate": "soc_code",
+      "value": "15-2051",
+      "source_kind": "lca"
+    },
+    {
+      "predicate": "worksite_address",
+      "value": "500 Technology Drive, Suite 400, Austin, TX 78701",
+      "source_kind": "lca"
+    },
+    {
+      "predicate": "current_nonimmigrant_status",
+      "value": "F-1",
+      "source_kind": "i94"
+    },
+    {
+      "predicate": "i94_number",
+      "value": "12345678901",
+      "source_kind": "i94"
+    },
+    {
+      "predicate": "beneficiary_degree",
+      "value": "Master of Science",
+      "source_kind": "degree"
+    },
+    {
+      "predicate": "degree_field",
+      "value": "Computer Science",
+      "source_kind": "degree"
+    }
+  ],
+  "expected_gates": [
+    {
+      "gate": "missing_required_field",
+      "category": "intake-completeness",
+      "missing_field": "annual_wage_usd",
+      "severity": "rfe",
+      "detects": "the offer letter is present but states no annualized salary — the offered wage cannot be read or compared to the prevailing wage",
+      "affected_form": "I-129 Part 5",
+      "why": "The offered wage is a required field (and must be checked against the prevailing wage); an offer with no salary is an incomplete intake."
+    }
+  ]
+}

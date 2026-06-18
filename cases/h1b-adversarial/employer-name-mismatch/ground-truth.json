@@ -1,0 +1,54 @@
+{
+  "_note": "ADVERSARIAL fixture for the Pearson H-1B intake validation suite. One injected defect per case. Fictional / synthetic — no real PII. A case PASSES only when the named expected gate fires (not merely 'some' gate).",
+  "defect": "employer_name_mismatch",
+  "base_persona": "arjun-kumar",
+  "scenario": "Cap-subject new hire; F-1 OPT to H-1B; US STEM master's.",
+  "beneficiary_from_passport": {
+    "beneficiary_full_name": "ARJUN KUMAR",
+    "beneficiary_dob": "1985-05-24",
+    "beneficiary_country_of_citizenship": "IND",
+    "passport_number": "P8401723",
+    "passport_expiration": "2031-06-14"
+  },
+  "employment_from_offer_letter": {
+    "petitioner_legal_name": "Northwind Analytics, Inc.",
+    "petitioner_ein": "47-3829150",
+    "job_title": "Senior Data Scientist",
+    "soc_code": "15-2051",
+    "annual_wage_usd": 142000,
+    "worksite_address": "500 Technology Drive, Suite 400, Austin, TX 78701",
+    "requested_start_date": "2026-10-01",
+    "requested_end_date": "2029-09-30"
+  },
+  "status_from_i94": {
+    "i94_number": "12345678901",
+    "current_nonimmigrant_status": "F-1"
+  },
+  "education_from_degree": {
+    "beneficiary_degree": "Master of Science",
+    "degree_field": "Computer Science"
+  },
+  "mrz": {
+    "line1": "P<INDKUMAR<<ARJUN<<<<<<<<<<<<<<<<<<<<<<<<<<<",
+    "line2": "P8401723<6IND8505246M3106143<<<<<<<<<<<<<<08"
+  },
+  "expected_gates": [
+    {
+      "gate": "employer_name_mismatch",
+      "category": "petitioner-consistency",
+      "detects": "petitioner legal name on the LCA ('Northwind Analytics LLC') does not match the offer letter ('Northwind Analytics, Inc.')",
+      "documents": [
+        "offer",
+        "lca"
+      ],
+      "cross_document": true,
+      "severity": "rfe",
+      "affected_form": "I-129 Part 1 + LCA",
+      "why": "The petitioner must be the same legal entity across the petition, offer, and LCA; an entity-name divergence signals a successor-in-interest question or a filing error and draws an RFE.",
+      "evidence": {
+        "offer_petitioner_legal_name": "Northwind Analytics, Inc.",
+        "lca_petitioner_legal_name": "Northwind Analytics LLC"
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "_note": "Expected extraction values for the Pearson H-1B demo accuracy check. Fictional / synthetic — no real PII.",
+  "scenario": "Cap-subject new hire; F-1 OPT to H-1B; US STEM master's.",
+  "persona": "arjun-kumar",
+  "beneficiary_from_passport": {
+    "beneficiary_full_name": "ARJUN KUMAR",
+    "beneficiary_dob": "1985-05-24",
+    "beneficiary_country_of_citizenship": "IND",
+    "passport_number": "P8401723",
+    "passport_expiration": "2031-06-14"
+  },
+  "employment_from_offer_letter": {
+    "petitioner_legal_name": "Northwind Analytics, Inc.",
+    "petitioner_ein": "47-3829150",
+    "petitioner_address": "500 Technology Drive, Suite 400, Austin, TX 78701",
+    "job_title": "Senior Data Scientist",
+    "soc_code": "15-2051",
+    "annual_wage_usd": 142000,
+    "worksite_address": "500 Technology Drive, Suite 400, Austin, TX 78701",
+    "requested_start_date": "2026-10-01",
+    "requested_end_date": "2029-09-30",
+    "requested_status": "H-1B"
+  },
+  "status_from_i94": {
+    "i94_number": "12345678901",
+    "current_nonimmigrant_status": "F-1"
+  },
+  "education_from_degree": {
+    "beneficiary_degree": "Master of Science",
+    "degree_field": "Computer Science"
+  },
+  "mrz": {
+    "line1": "P<INDKUMAR<<ARJUN<<<<<<<<<<<<<<<<<<<<<<<<<<<",
+    "line2": "P8401723<6IND8505246M3106143<<<<<<<<<<<<<<08"
+  },
+  "material_change_email": {
+    "type": "compensation",
+    "subject": "Updated compensation for Arjun Kumar H-1B petition",
+    "body": "Hi — following our comp review, Arjun Kumar's annualized base salary for the Senior Data Scientist role has been increased from $142,000 to $156,000 USD, effective on his petition start date. Please make sure the petition reflects the new figure. Thanks, Daniel Okafor, Northwind Analytics.",
+    "changed": {
+      "annual_wage_usd": 156000
+    }
+  },
+  "extra_documents": [
+    {
+      "file": "resume.pdf",
+      "kind": "resume",
+      "required": false,
+      "description": "Candidate résumé / CV (2 pages; over-shared, not required for I-129)"
+    },
+    {
+      "file": "i20.pdf",
+      "kind": "i20",
+      "required": false,
+      "description": "Form I-20 / OPT student record (status history, not required)"
+    },
+    {
+      "file": "paystub.pdf",
+      "kind": "paystub",
+      "required": false,
+      "description": "Recent pay stub from current employer (over-shared, not required)"
+    }
+  ]
+}

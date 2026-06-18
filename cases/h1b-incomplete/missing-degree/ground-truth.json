@@ -1,0 +1,98 @@
+{
+  "_note": "INCOMPLETE ('not-enough') fixture for the Pearson H-1B intake-completeness suite. Exactly one required document or field is MISSING. Fictional / synthetic — no real PII. A case PASSES only when the named completeness gate fires.",
+  "defect": "missing_required_document",
+  "base_persona": "abigail-medina",
+  "scenario": "Foreign degree + credential evaluation; TN to H-1B.  (intake incomplete — missing degree)",
+  "documents_present": [
+    "passport",
+    "offer",
+    "lca",
+    "i94"
+  ],
+  "documents_missing": [
+    "degree"
+  ],
+  "facts": [
+    {
+      "predicate": "passport_number",
+      "value": "G14820073",
+      "source_kind": "passport"
+    },
+    {
+      "predicate": "beneficiary_full_name",
+      "value": "ABIGAIL MEDINA PEREZ",
+      "source_kind": "passport"
+    },
+    {
+      "predicate": "passport_expiration",
+      "value": "2032-06-11",
+      "source_kind": "passport"
+    },
+    {
+      "predicate": "annual_wage_usd",
+      "value": 108000,
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "soc_code",
+      "value": "17-2141",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "job_title",
+      "value": "Mechanical Engineer",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "worksite_address",
+      "value": "1400 Rosa Parks Blvd, Detroit, MI 48216",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "requested_start_date",
+      "value": "2026-10-15",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "beneficiary_full_name",
+      "value": "ABIGAIL MEDINA PEREZ",
+      "source_kind": "offer"
+    },
+    {
+      "predicate": "prevailing_wage",
+      "value": 101733,
+      "source_kind": "lca"
+    },
+    {
+      "predicate": "soc_code",
+      "value": "17-2141",
+      "source_kind": "lca"
+    },
+    {
+      "predicate": "worksite_address",
+      "value": "1400 Rosa Parks Blvd, Detroit, MI 48216",
+      "source_kind": "lca"
+    },
+    {
+      "predicate": "current_nonimmigrant_status",
+      "value": "TN",
+      "source_kind": "i94"
+    },
+    {
+      "predicate": "i94_number",
+      "value": "55512340987",
+      "source_kind": "i94"
+    }
+  ],
+  "expected_gates": [
+    {
+      "gate": "missing_required_document",
+      "category": "intake-completeness",
+      "missing_kind": "degree",
+      "severity": "blocker",
+      "detects": "no degree / credential evaluation in the packet — the specialty-occupation requirement and the beneficiary's qualification cannot be established",
+      "affected_form": "I-129 specialty-occupation evidence",
+      "why": "An H-1B specialty occupation requires evidence the beneficiary holds the required degree (8 CFR 214.2(h))."
+    }
+  ]
+}

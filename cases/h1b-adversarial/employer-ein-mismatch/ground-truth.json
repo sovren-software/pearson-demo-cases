@@ -1,0 +1,54 @@
+{
+  "_note": "ADVERSARIAL fixture for the Pearson H-1B intake validation suite. One injected defect per case. Fictional / synthetic — no real PII. A case PASSES only when the named expected gate fires (not merely 'some' gate).",
+  "defect": "employer_ein_mismatch",
+  "base_persona": "yangben-zhengjian",
+  "scenario": "H-1B transfer / portability (currently in H-1B with another employer).",
+  "beneficiary_from_passport": {
+    "beneficiary_full_name": "YANGBEN ZHENGJIAN",
+    "beneficiary_dob": "1985-03-20",
+    "beneficiary_country_of_citizenship": "CHN",
+    "passport_number": "EF1260892",
+    "passport_expiration": "2029-01-17"
+  },
+  "employment_from_offer_letter": {
+    "petitioner_legal_name": "Cascade Robotics, LLC",
+    "petitioner_ein": "84-2910736",
+    "job_title": "Data Engineer",
+    "soc_code": "15-1243",
+    "annual_wage_usd": 138000,
+    "worksite_address": "2200 6th Avenue, Seattle, WA 98121",
+    "requested_start_date": "2026-11-01",
+    "requested_end_date": "2029-10-31"
+  },
+  "status_from_i94": {
+    "i94_number": "98765432100",
+    "current_nonimmigrant_status": "H-1B"
+  },
+  "education_from_degree": {
+    "beneficiary_degree": "Master of Science",
+    "degree_field": "Computer Engineering"
+  },
+  "mrz": {
+    "line1": "P<CHNZHENGJIAN<<YANGBEN<<<<<<<<<<<<<<<<<<<<<",
+    "line2": "EF12608921CHN8503208F2901178<<<<<<<<<<<<<<04"
+  },
+  "expected_gates": [
+    {
+      "gate": "employer_ein_mismatch",
+      "category": "petitioner-consistency",
+      "detects": "petitioner FEIN on the LCA (82-7654321) does not match the offer letter (84-2910736)",
+      "documents": [
+        "offer",
+        "lca"
+      ],
+      "cross_document": true,
+      "severity": "rfe",
+      "affected_form": "I-129 Part 1 + LCA",
+      "why": "A different FEIN generally signals a different legal entity; the petitioner on the LCA must be the petitioner on the I-129. A mismatch is a successor-in-interest / wrong-entity RFE.",
+      "evidence": {
+        "offer_petitioner_ein": "84-2910736",
+        "lca_petitioner_ein": "82-7654321"
+      }
+    }
+  ]
+}

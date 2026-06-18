@@ -1,0 +1,55 @@
+{
+  "_note": "ADVERSARIAL fixture for the Pearson H-1B intake validation suite. One injected defect per case. Fictional / synthetic — no real PII. A case PASSES only when the named expected gate fires (not merely 'some' gate).",
+  "defect": "mrz_checkdigit_corrupt",
+  "base_persona": "arjun-kumar",
+  "scenario": "Cap-subject new hire; F-1 OPT to H-1B; US STEM master's.",
+  "beneficiary_from_passport": {
+    "beneficiary_full_name": "ARJUN KUMAR",
+    "beneficiary_dob": "1985-05-24",
+    "beneficiary_country_of_citizenship": "IND",
+    "passport_number": "P8401723",
+    "passport_expiration": "2031-06-14"
+  },
+  "employment_from_offer_letter": {
+    "petitioner_legal_name": "Northwind Analytics, Inc.",
+    "job_title": "Senior Data Scientist",
+    "soc_code": "15-2051",
+    "annual_wage_usd": 142000,
+    "worksite_address": "500 Technology Drive, Suite 400, Austin, TX 78701",
+    "requested_start_date": "2026-10-01",
+    "requested_end_date": "2029-09-30"
+  },
+  "status_from_i94": {
+    "i94_number": "12345678901",
+    "current_nonimmigrant_status": "F-1"
+  },
+  "education_from_degree": {
+    "beneficiary_degree": "Master of Science",
+    "degree_field": "Computer Science"
+  },
+  "mrz": {
+    "line1": "P<INDKUMAR<<ARJUN<<<<<<<<<<<<<<<<<<<<<<<<<<<",
+    "line2": "P8401723<7IND8505246M3106143<<<<<<<<<<<<<<08",
+    "corrupted": true,
+    "corrupted_index": 9,
+    "note": "line2[9] (passport-number check digit) flipped; the visual zone is correct."
+  },
+  "expected_gates": [
+    {
+      "gate": "mrz_checkdigit_corrupt",
+      "category": "document-integrity",
+      "detects": "passport MRZ line 2 fails the ICAO 9303 passport-number check digit; beneficiary identity facts cannot be deterministically validated",
+      "documents": [
+        "passport"
+      ],
+      "cross_document": false,
+      "severity": "rfe",
+      "affected_form": "I-129 Part 3",
+      "why": "A failed check digit means OCR error or tampering. mrtd rejects the MRZ → facts are withheld; surface an mrz-validation review gate instead of silently dropping identity.",
+      "evidence": {
+        "corrupted_field": "passport_number_check_digit",
+        "line2_index": 9
+      }
+    }
+  ]
+}
