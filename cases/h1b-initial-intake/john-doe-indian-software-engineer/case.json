@@ -1,0 +1,27 @@
+{
+  "case_id": "john-doe-indian-software-engineer-initial-intake",
+  "corpus": "h1b-initial-intake",
+  "workflow_stage": "initial_intake",
+  "fictional": true,
+  "beneficiary": {
+    "name": "John Doe",
+    "country_of_birth": "India",
+    "country_of_citizenship": "India",
+    "current_status": "F-1 STEM OPT"
+  },
+  "petitioner": "Northstar Data Systems, Inc.",
+  "proposed_position": "Software Engineer I",
+  "intended_h1b_start_date": "2026-10-01",
+  "upload_folder": "packet-for-lei-upload",
+  "do_not_upload": [
+    "attorney-only",
+    "ground-truth.json"
+  ],
+  "test_objectives": [
+    "Distinguish initial intake documents from legal-team-created filing documents",
+    "Avoid treating missing LCA/support letter as a defect at initial intake",
+    "Flag remote home office for LCA/worksite analysis",
+    "Treat near-expiring passport as advisory/follow-up rather than automatic filing blocker",
+    "Avoid overreacting to title and name-formatting differences"
+  ]
+}

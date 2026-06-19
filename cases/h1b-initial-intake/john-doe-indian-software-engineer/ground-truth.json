@@ -1,0 +1,54 @@
+{
+  "case_id": "LEI_CASE_001_JOHN_DOE",
+  "workflow_stage": "initial_intake",
+  "beneficiary": {
+    "name": "John Doe",
+    "country_of_birth": "India",
+    "country_of_citizenship": "India",
+    "current_status": "F-1 STEM OPT"
+  },
+  "petitioner": "Northstar Data Systems, Inc.",
+  "proposed_position": "Software Engineer I",
+  "expected_findings": [
+    {
+      "id": "lca_absent_initial_intake",
+      "severity": "no_issue_monitor",
+      "expected_treatment": "Do not flag missing certified LCA as defect at initial intake."
+    },
+    {
+      "id": "support_letter_absent_initial_intake",
+      "severity": "no_issue_monitor",
+      "expected_treatment": "Do not flag missing support letter as defect at initial intake."
+    },
+    {
+      "id": "passport_expires_soon",
+      "severity": "client_or_beneficiary_action_needed",
+      "expected_treatment": "Request renewed passport when available; advise on travel/I-94 implications."
+    },
+    {
+      "id": "remote_worksite_athens",
+      "severity": "high_risk_attorney_review",
+      "expected_treatment": "Analyze home office for LCA/worksite purposes."
+    },
+    {
+      "id": "current_title_vs_proposed_title",
+      "severity": "no_issue_monitor",
+      "expected_treatment": "Do not treat title difference alone as material."
+    },
+    {
+      "id": "degree_position_nexus",
+      "severity": "no_issue_monitor",
+      "expected_treatment": "Degrees appear related; document nexus in drafting."
+    },
+    {
+      "id": "salary_prevailing_wage_review_needed",
+      "severity": "high_risk_attorney_review",
+      "expected_treatment": "Review wage only after SOC, wage level, worksite, and prevailing wage data are determined."
+    },
+    {
+      "id": "name_formatting_difference",
+      "severity": "client_or_beneficiary_action_needed",
+      "expected_treatment": "Confirm full legal name and middle initial; do not treat as serious mismatch."
+    }
+  ]
+}
