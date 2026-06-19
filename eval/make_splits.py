@@ -16,7 +16,7 @@ The split is:
   - reproducible as the corpus grows — re-run after adding cases; existing
                        assignments are stable because they depend only on the id.
 
-At today's size (~37 cases) the split is more about *establishing the convention*
+At today's size (~38 cases) the split is more about *establishing the convention*
 than statistical power. The ratio scales with the corpus.
 
 Usage:  python3 eval/make_splits.py        # writes eval/splits/{train,dev,test}.txt
@@ -36,9 +36,9 @@ RATIOS = (("train", 0.60), ("dev", 0.20), ("test", 0.20))
 
 
 def discover():
-    """Return {corpus: [case_id, ...]} across all five corpora."""
+    """Return {corpus: [case_id, ...]} across all corpora."""
     out = {}
-    for corpus in ("h1b", "h1b-adversarial", "h1b-incomplete"):
+    for corpus in ("h1b", "h1b-adversarial", "h1b-incomplete", "h1b-initial-intake"):
         ids = [
             f"{corpus}/{os.path.basename(os.path.dirname(p))}"
             for p in glob.glob(os.path.join(ROOT, "cases", corpus, "*", "ground-truth.json"))

@@ -26,13 +26,14 @@ This corpus has two audiences:
 
 ## What's in the box
 
-**37 cases across 5 corpora**, plus a generator and a stdlib-only reference validator.
+**38 cases across 6 corpora**, plus a generator and a stdlib-only reference validator.
 
 | Corpus | Cases | What it proves | Form |
 |--------|:-----:|----------------|------|
 | [`cases/h1b`](cases/h1b) | 3 | **Happy path** — clean documents extract into facts that fill the I-129 | full document packets |
 | [`cases/h1b-adversarial`](cases/h1b-adversarial) | 8 | **Contradiction gates** — one injected defect per case (wage below prevailing, name/SOC/employer/EIN mismatch, worksite outside LCA, expired passport, corrupt MRZ) — the folder *is* the gate it must trip | full packets + `expected_gates` |
 | [`cases/h1b-incomplete`](cases/h1b-incomplete) | 4 | **Completeness gates** — one required document or field is missing | partial packets |
+| [`cases/h1b-initial-intake`](cases/h1b-initial-intake) | 1 | **Workflow-stage review** — HR/FN source documents are present while legal-drafted filing artifacts are intentionally absent | intake packet + attorney-only answer key |
 | [`cases/h1b-materiality`](cases/h1b-materiality) | 17 | **Change → impact** — a petition field changes mid-case; what's the correct verdict (amendment / notice / stale / constraint-violated)? | `cases.json` fixtures |
 | [`cases/h1b-statusclock`](cases/h1b-statusclock) | 5 | **Deadline math** — H/L-1 six-year max-out, day recapture, and clock reset | `cases.json` fixtures |
 
@@ -48,12 +49,12 @@ python3 validator/validate.py all
 ```
 
 ```
-integrity:   17 passed, 0 failed, 0 skipped
+integrity:   18 passed, 0 failed, 0 skipped
 adversarial:  8 passed, 0 failed, 0 skipped
 incomplete:   4 passed, 0 failed, 0 skipped
 statusclock:  5 passed, 0 failed, 0 skipped
 materiality: 17 passed, 0 failed, 0 skipped
-TOTAL: 51 passed, 0 failed, 0 skipped
+TOTAL: 52 passed, 0 failed, 0 skipped
 ```
 
 ```sh
@@ -66,7 +67,7 @@ The validator is a **clean-room reference implementation** of every detection ga
 
 ## Each case, on disk
 
-A document case (happy / adversarial / incomplete) is what a client would actually hand over:
+A document case (happy / adversarial / incomplete / initial intake) is what a client would actually hand over:
 
 ```
 cases/h1b-adversarial/wage-below-prevailing/

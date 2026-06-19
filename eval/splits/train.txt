@@ -5,6 +5,7 @@ h1b-adversarial/passport-expired-before-period
 h1b-adversarial/soc-code-mismatch
 h1b-incomplete/missing-degree
 h1b-incomplete/missing-lca
+h1b-initial-intake/john-doe-indian-software-engineer
 h1b-materiality/employer-ein-change-amendment
 h1b-materiality/end-date-extension-amendment
 h1b-materiality/hours-per-week-change-amendment

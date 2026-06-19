@@ -8,6 +8,10 @@ This case is designed to test LEI at the **initial H-1B intake** stage, before t
 
 `john-doe-indian-software-engineer-initial-intake`
 
+## LEI Display ID
+
+`LEI_CASE_001_JOHN_DOE`
+
 ## Workflow Stage
 
 `initial_intake`
@@ -24,7 +28,7 @@ Upload only:
 
 Do **not** upload:
 
-`attorney-only/` or `ground-truth.json`
+`attorney-only/`, `ground-truth.json`, or `case.json`
 
 ## Why This Case Exists
 
