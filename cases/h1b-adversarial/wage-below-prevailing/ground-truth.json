@@ -2,6 +2,12 @@
   "_note": "ADVERSARIAL fixture for the Pearson H-1B intake validation suite. One injected defect per case. Fictional / synthetic — no real PII. A case PASSES only when the named expected gate fires (not merely 'some' gate).",
   "defect": "wage_below_prevailing",
   "base_persona": "arjun-kumar",
+  "attorney_review": {
+    "status": "approved_with_conditions",
+    "reviewer": "Licensed U.S. immigration attorney",
+    "date": "2026-06-16",
+    "note": "Yes, for most cases, this can be fixed with an email to HR and the employee's manager for a pay increase. But this def needs to be flagged"
+  },
   "scenario": "Cap-subject new hire; F-1 OPT to H-1B; US STEM master's.",
   "beneficiary_from_passport": {
     "beneficiary_full_name": "ARJUN KUMAR",

@@ -2,6 +2,11 @@
   "_note": "ADVERSARIAL fixture for the Pearson H-1B intake validation suite. One injected defect per case. Fictional / synthetic — no real PII. A case PASSES only when the named expected gate fires (not merely 'some' gate).",
   "defect": "soc_code_mismatch",
   "base_persona": "yangben-zhengjian",
+  "attorney_review": {
+    "status": "confirmed",
+    "reviewer": "Licensed U.S. immigration attorney",
+    "date": "2026-06-16"
+  },
   "scenario": "H-1B transfer / portability (currently in H-1B with another employer).",
   "beneficiary_from_passport": {
     "beneficiary_full_name": "YANGBEN ZHENGJIAN",

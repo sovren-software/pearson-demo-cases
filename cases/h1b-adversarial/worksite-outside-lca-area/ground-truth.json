@@ -2,6 +2,12 @@
   "_note": "ADVERSARIAL fixture for the Pearson H-1B intake validation suite. One injected defect per case. Fictional / synthetic — no real PII. A case PASSES only when the named expected gate fires (not merely 'some' gate).",
   "defect": "worksite_outside_lca_area",
   "base_persona": "yangben-zhengjian",
+  "attorney_review": {
+    "status": "approved_with_conditions",
+    "reviewer": "Licensed U.S. immigration attorney",
+    "date": "2026-06-16",
+    "note": "This is essentially correct, however, keep an eye out for if the employee will be working remotely, because if they are remote, the LCA would not neceserally match the offer letter. It would be their home addresss used"
+  },
   "scenario": "H-1B transfer / portability (currently in H-1B with another employer).",
   "beneficiary_from_passport": {
     "beneficiary_full_name": "YANGBEN ZHENGJIAN",

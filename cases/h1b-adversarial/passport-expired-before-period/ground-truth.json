@@ -2,6 +2,12 @@
   "_note": "ADVERSARIAL fixture for the Pearson H-1B intake validation suite. One injected defect per case. Fictional / synthetic — no real PII. A case PASSES only when the named expected gate fires (not merely 'some' gate).",
   "defect": "passport_expired_before_period",
   "base_persona": "abigail-medina",
+  "attorney_review": {
+    "status": "approved_with_conditions",
+    "reviewer": "Licensed U.S. immigration attorney",
+    "date": "2026-06-16",
+    "note": "the passport doesnt have to be valid for the start date, it just needs to be valid when the petition is filed. however, if the passport is expiring within 6 months, we would want to flag the employee to initate the passport renewal process. This only becomes an issue when the employee travels as CBP typically matched the passport expiration date to the I-94, so they will essentially be shorted. USCIS doesnt typically short petitions to match the passport"
+  },
   "scenario": "Foreign degree + credential evaluation; TN to H-1B.",
   "beneficiary_from_passport": {
     "beneficiary_full_name": "ABIGAIL MEDINA PEREZ",

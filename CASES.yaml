@@ -14,6 +14,24 @@ naming:
   fixtures:     "materiality & statusclock are a single cases.json keyed by rule/scenario id (no persona, no folders)."
   link:         "scenario corpora record their base persona in ground-truth.json -> base_persona; happy records -> persona."
 
+# ── Attorney review status ──────────────────────────────────────────────────────
+# Every adversarial ground-truth.json and materiality case carries an `attorney_review`
+# block (status + reviewer + the attorney's verbatim note). Be honest about what's
+# validated vs. what still needs an expert's eyes.
+attorney_review:
+  reviewer: "Licensed U.S. immigration attorney"
+  date: 2026-06-16
+  summary: "22 rules reviewed -> 13 confirmed, 9 approved-with-conditions, 0 rejected."
+  statuses:
+    confirmed: "the attorney approved the rule as-is"
+    approved_with_conditions: "directionally correct, but a nuance was flagged to encode (see each case's note) — these are where new reviewers add the most value"
+    unreviewed: "not covered by this review (e.g. the document-integrity mrz gate)"
+    not_applicable: "an engine-behavior fixture, not a legal rule"
+  example_condition: >-
+    passport-expired-before-period: the attorney noted validity is assessed AT FILING,
+    not the start date; near-expiry (<6 months) is a travel/CBP-I-94 advisory, not a
+    petition blocker. The case carries that note pending re-encoding of the corrected rule.
+
 # ── Personas (the demo cast) ────────────────────────────────────────────────────
 personas:
   - slug: arjun-kumar

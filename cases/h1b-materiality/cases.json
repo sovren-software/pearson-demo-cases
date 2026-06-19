@@ -12,17 +12,36 @@
       "rule": 1,
       "title": "Wage decreases but stays above prevailing → amendment (no constraint)",
       "stage": "filed",
-      "facts": [ { "predicate": "prevailing_wage", "value": 131019, "source_kind": "lca" } ],
-      "change": { "predicate": "annual_wage_usd", "old": 142000, "new": 135000 },
+      "facts": [
+        {
+          "predicate": "prevailing_wage",
+          "value": 131019,
+          "source_kind": "lca"
+        }
+      ],
+      "change": {
+        "predicate": "annual_wage_usd",
+        "old": 142000,
+        "new": 135000
+      },
       "expect": {
-        "rule_ids": ["wage_decrease_amendment"],
-        "forbid_rule_ids": ["wage_below_prevailing"],
+        "rule_ids": [
+          "wage_decrease_amendment"
+        ],
+        "forbid_rule_ids": [
+          "wage_below_prevailing"
+        ],
         "material": true,
         "primary_kind": "amendment_required",
         "primary_form": "I-129 Part 5 + LCA"
       },
       "legal_basis": "DOL 20 CFR 655.731 — offered wage must meet/exceed prevailing; a decrease can require a new LCA before it takes effect.",
-      "attorney": ""
+      "attorney": "confirmed — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "confirmed",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16"
+      }
     },
     {
       "id": "wage-increase-stale",
@@ -30,14 +49,25 @@
       "title": "Wage increases → stale (update the figure, not an amendment trigger)",
       "stage": "filed",
       "facts": [],
-      "change": { "predicate": "annual_wage_usd", "old": 142000, "new": 156000 },
+      "change": {
+        "predicate": "annual_wage_usd",
+        "old": 142000,
+        "new": 156000
+      },
       "expect": {
-        "rule_ids": ["wage_increase_update"],
+        "rule_ids": [
+          "wage_increase_update"
+        ],
         "material": false,
         "primary_kind": "stale"
       },
       "legal_basis": "Informational — a raise does not lower the wage below prevailing, so it updates the petition figure but is not itself an amendment trigger.",
-      "attorney": ""
+      "attorney": "confirmed — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "confirmed",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16"
+      }
     },
     {
       "id": "title-change-post-filing-amendment",
@@ -45,14 +75,26 @@
       "title": "Title changes AFTER filing → amendment (specialty-occupation basis)",
       "stage": "filed",
       "facts": [],
-      "change": { "predicate": "job_title", "old": "Data Scientist", "new": "Senior Data Scientist" },
+      "change": {
+        "predicate": "job_title",
+        "old": "Data Scientist",
+        "new": "Senior Data Scientist"
+      },
       "expect": {
-        "rule_ids": ["title_change_post_filing_amendment"],
+        "rule_ids": [
+          "title_change_post_filing_amendment"
+        ],
         "material": true,
         "primary_kind": "amendment_required"
       },
       "legal_basis": "8 CFR 214.2(h)(2)(i)(E) + Matter of Simeio line on material changes — a post-filing change in position can alter the specialty-occupation basis and generally requires an amended petition before it takes effect.",
-      "attorney": ""
+      "attorney": "approved with conditions — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "approved_with_conditions",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16",
+        "note": "An assessment will be required to determine if the proposed job duties are materially different or if it was just an inline promotion with very little material change. if the SOC code will remain the same and its mostly a pay increase and includes minimal additional duties, an amendment may not be required. "
+      }
     },
     {
       "id": "title-change-pre-filing-stale",
@@ -60,46 +102,95 @@
       "title": "Title changes BEFORE filing → stale (same change, earlier stage)",
       "stage": "compiling",
       "facts": [],
-      "change": { "predicate": "job_title", "old": "Data Scientist", "new": "Senior Data Scientist" },
+      "change": {
+        "predicate": "job_title",
+        "old": "Data Scientist",
+        "new": "Senior Data Scientist"
+      },
       "expect": {
-        "rule_ids": ["title_change_pre_filing_update"],
+        "rule_ids": [
+          "title_change_pre_filing_update"
+        ],
         "material": false,
         "primary_kind": "stale"
       },
       "legal_basis": "Pre-filing — update the petition and re-confirm the specialty-occupation basis; no amended petition because nothing has been filed yet.",
-      "attorney": ""
+      "attorney": "approved with conditions — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "approved_with_conditions",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16",
+        "note": "if we are updating the title in the forms, don't forget the LCA would also need to be updated to match the updated title"
+      }
     },
     {
       "id": "worksite-outside-lca-amendment",
       "rule": 5,
       "title": "Worksite moves OUTSIDE the LCA area → amendment (Simeio)",
       "stage": "filed",
-      "facts": [ { "predicate": "worksite_address", "value": "500 Technology Drive, Suite 400, Austin, TX 78701", "source_kind": "lca" } ],
-      "change": { "predicate": "worksite_address", "old": "500 Technology Drive, Suite 400, Austin, TX 78701", "new": "1300 SW 5th Avenue, Suite 2000, Portland, OR 97201" },
+      "facts": [
+        {
+          "predicate": "worksite_address",
+          "value": "500 Technology Drive, Suite 400, Austin, TX 78701",
+          "source_kind": "lca"
+        }
+      ],
+      "change": {
+        "predicate": "worksite_address",
+        "old": "500 Technology Drive, Suite 400, Austin, TX 78701",
+        "new": "1300 SW 5th Avenue, Suite 2000, Portland, OR 97201"
+      },
       "expect": {
-        "rule_ids": ["worksite_outside_lca_new_lca"],
+        "rule_ids": [
+          "worksite_outside_lca_new_lca"
+        ],
         "material": true,
         "primary_kind": "amendment_required",
         "primary_form": "LCA + I-129 Part 5"
       },
       "legal_basis": "Matter of Simeio Solutions, 26 I&N Dec. 542 (AAO 2015) — a worksite outside the LCA's area of intended employment requires a new LCA + amended petition.",
-      "attorney": ""
+      "attorney": "confirmed — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "confirmed",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16"
+      }
     },
     {
       "id": "worksite-within-area-stale",
       "rule": 6,
       "title": "Worksite moves WITHIN the LCA area → stale (suite/formatting change)",
       "stage": "filed",
-      "facts": [ { "predicate": "worksite_address", "value": "500 Technology Drive, Suite 400, Austin, TX 78701", "source_kind": "lca" } ],
-      "change": { "predicate": "worksite_address", "old": "500 Technology Drive, Suite 400, Austin, TX 78701", "new": "Building C, 500 Technology Dr, Austin, TX 78701" },
+      "facts": [
+        {
+          "predicate": "worksite_address",
+          "value": "500 Technology Drive, Suite 400, Austin, TX 78701",
+          "source_kind": "lca"
+        }
+      ],
+      "change": {
+        "predicate": "worksite_address",
+        "old": "500 Technology Drive, Suite 400, Austin, TX 78701",
+        "new": "Building C, 500 Technology Dr, Austin, TX 78701"
+      },
       "expect": {
-        "rule_ids": ["worksite_change_update"],
-        "forbid_rule_ids": ["worksite_outside_lca_new_lca"],
+        "rule_ids": [
+          "worksite_change_update"
+        ],
+        "forbid_rule_ids": [
+          "worksite_outside_lca_new_lca"
+        ],
         "material": false,
         "primary_kind": "stale"
       },
       "legal_basis": "Within the certified area of intended employment — confirm it still falls inside the area; a formatting/suite change updates the petition but does not amend it.",
-      "attorney": ""
+      "attorney": "approved with conditions — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "approved_with_conditions",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16",
+        "note": "THis is correct, however, some firms will want to repost the LCA for the new address, while other leave it as is. I would flag this for review"
+      }
     },
     {
       "id": "home-address-ar11-notice",
@@ -107,16 +198,28 @@
       "title": "Beneficiary home address changes → AR-11 notice within 10 days (NOT an amendment)",
       "stage": "filed",
       "facts": [],
-      "change": { "predicate": "us_physical_address", "old": "1200 W Dean Keeton St, Apt 305, Austin, TX 78705", "new": "4120 Woodward Ave, Apt 7B, Detroit, MI 48201" },
+      "change": {
+        "predicate": "us_physical_address",
+        "old": "1200 W Dean Keeton St, Apt 305, Austin, TX 78705",
+        "new": "4120 Woodward Ave, Apt 7B, Detroit, MI 48201"
+      },
       "expect": {
-        "rule_ids": ["home_address_ar11"],
+        "rule_ids": [
+          "home_address_ar11"
+        ],
         "material": false,
         "primary_kind": "notice_obligation",
         "primary_form": "Form AR-11",
         "deadline_days": 10
       },
       "legal_basis": "8 CFR 265.1 — a residential address change requires Form AR-11 within 10 days; it does not amend the petition.",
-      "attorney": ""
+      "attorney": "approved with conditions — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "approved_with_conditions",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16",
+        "note": "again some firms/companies would do an LCA reposting if the home address was included in the LCA. If the home address wasnt on the LCA, an AR11 is all thats needed."
+      }
     },
     {
       "id": "name-correction-amendment",
@@ -124,15 +227,27 @@
       "title": "Beneficiary legal name corrected → amendment / consistency (biographic match)",
       "stage": "filed",
       "facts": [],
-      "change": { "predicate": "beneficiary_full_name", "old": "ARJUN KUMAR", "new": "ARJUN KUMARR" },
+      "change": {
+        "predicate": "beneficiary_full_name",
+        "old": "ARJUN KUMAR",
+        "new": "ARJUN KUMARR"
+      },
       "expect": {
-        "rule_ids": ["name_correction_consistency"],
+        "rule_ids": [
+          "name_correction_consistency"
+        ],
         "material": true,
         "primary_kind": "amendment_required",
         "primary_form": "I-129 Part 3"
       },
       "legal_basis": "USCIS identity-consistency — corrected biographic data must match the petition and all supporting documents to avoid an inconsistency finding / RFE.",
-      "attorney": ""
+      "attorney": "approved with conditions — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "approved_with_conditions",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16",
+        "note": "we would mostly want to match all names to the passport. if the passport name remains the same, we would want to ensure the name remains consistant on all the forms. And on the forms, there is a space for other names that we can just include the alternative names. The important thing here is that the name on the forms match the passport"
+      }
     },
     {
       "id": "soc-code-change-amendment",
@@ -140,30 +255,59 @@
       "title": "SOC / occupation code changes → amendment (LCA correspondence)",
       "stage": "filed",
       "facts": [],
-      "change": { "predicate": "soc_code", "old": "15-2051", "new": "15-1252" },
+      "change": {
+        "predicate": "soc_code",
+        "old": "15-2051",
+        "new": "15-1252"
+      },
       "expect": {
-        "rule_ids": ["soc_code_change_lca"],
+        "rule_ids": [
+          "soc_code_change_lca"
+        ],
         "material": true,
         "primary_kind": "amendment_required",
         "primary_form": "I-129 + LCA"
       },
       "legal_basis": "LCA-correspondence (DOL/USCIS) — the SOC code must correspond between the petition and the certified LCA; a change generally requires a new LCA + amended petition.",
-      "attorney": ""
+      "attorney": "confirmed — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "confirmed",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16"
+      }
     },
     {
       "id": "wage-cut-below-prevailing-counterfactual",
       "rule": 1,
       "title": "Boundary — wage cut BELOW prevailing → amendment AND a counterfactual constraint violation",
       "stage": "filed",
-      "facts": [ { "predicate": "prevailing_wage", "value": 131019, "source_kind": "lca" } ],
-      "change": { "predicate": "annual_wage_usd", "old": 142000, "new": 120000 },
+      "facts": [
+        {
+          "predicate": "prevailing_wage",
+          "value": 131019,
+          "source_kind": "lca"
+        }
+      ],
+      "change": {
+        "predicate": "annual_wage_usd",
+        "old": 142000,
+        "new": 120000
+      },
       "expect": {
-        "rule_ids": ["wage_decrease_amendment", "wage_below_prevailing"],
+        "rule_ids": [
+          "wage_decrease_amendment",
+          "wage_below_prevailing"
+        ],
         "material": true,
         "primary_kind": "amendment_required"
       },
       "legal_basis": "Exercises the counterfactual constraint pass: the decrease is itself an amendment (rule 1) AND, applied in-memory, drops the offered wage below the certified prevailing wage (DOL 20 CFR 655.731) — a denial-grade cross-document violation the change CAUSES.",
-      "attorney": ""
+      "attorney": "confirmed — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "confirmed",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16"
+      }
     },
     {
       "id": "end-date-extension-amendment",
@@ -171,14 +315,25 @@
       "title": "Coverage — requested end date extended → amendment (extension petition) [AI-drafted, pending]",
       "stage": "filed",
       "facts": [],
-      "change": { "predicate": "requested_end_date", "old": "2029-09-30", "new": "2031-09-30" },
+      "change": {
+        "predicate": "requested_end_date",
+        "old": "2029-09-30",
+        "new": "2031-09-30"
+      },
       "expect": {
-        "rule_ids": ["end_date_extension_amendment"],
+        "rule_ids": [
+          "end_date_extension_amendment"
+        ],
         "material": true,
         "primary_kind": "amendment_required"
       },
       "legal_basis": "AI-DRAFTED, ATTORNEY-PENDING. An extension of stay requires a new I-129 filed before the current period expires. NUANCE: a pure date correction (not an extension) may only be a staleness update — the attorney may split this into extend-vs-correct.",
-      "attorney": ""
+      "attorney": "confirmed — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "confirmed",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16"
+      }
     },
     {
       "id": "fte-to-parttime-amendment",
@@ -186,14 +341,25 @@
       "title": "Coverage — full-time → part-time → amendment (terms of employment) [AI-drafted, pending]",
       "stage": "filed",
       "facts": [],
-      "change": { "predicate": "full_time_position", "old": true, "new": false },
+      "change": {
+        "predicate": "full_time_position",
+        "old": true,
+        "new": false
+      },
       "expect": {
-        "rule_ids": ["full_time_status_change_amendment"],
+        "rule_ids": [
+          "full_time_status_change_amendment"
+        ],
         "material": true,
         "primary_kind": "amendment_required"
       },
       "legal_basis": "AI-DRAFTED, ATTORNEY-PENDING. A change between full-time and part-time is a material change in the terms of employment (and can change the LCA wage basis).",
-      "attorney": ""
+      "attorney": "confirmed — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "confirmed",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16"
+      }
     },
     {
       "id": "hours-per-week-change-amendment",
@@ -201,14 +367,25 @@
       "title": "Coverage — weekly hours changed → amendment (terms / LCA wage basis) [AI-drafted, pending]",
       "stage": "filed",
       "facts": [],
-      "change": { "predicate": "hours_per_week", "old": 40, "new": 25 },
+      "change": {
+        "predicate": "hours_per_week",
+        "old": 40,
+        "new": 25
+      },
       "expect": {
-        "rule_ids": ["hours_per_week_change_amendment"],
+        "rule_ids": [
+          "hours_per_week_change_amendment"
+        ],
         "material": true,
         "primary_kind": "amendment_required"
       },
       "legal_basis": "AI-DRAFTED, ATTORNEY-PENDING. A change in weekly hours can be a material change in the terms of employment and the LCA wage basis. NUANCE: a small change within full-time may not be material — the attorney may set a threshold.",
-      "attorney": ""
+      "attorney": "confirmed — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "confirmed",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16"
+      }
     },
     {
       "id": "employer-legal-name-change-amendment",
@@ -216,14 +393,25 @@
       "title": "Coverage — petitioner legal name changed → amendment / successor-in-interest [AI-drafted, pending]",
       "stage": "filed",
       "facts": [],
-      "change": { "predicate": "petitioner_legal_name", "old": "Northwind Analytics, Inc.", "new": "Northwind Data Corporation" },
+      "change": {
+        "predicate": "petitioner_legal_name",
+        "old": "Northwind Analytics, Inc.",
+        "new": "Northwind Data Corporation"
+      },
       "expect": {
-        "rule_ids": ["petitioner_legal_name_change_amendment"],
+        "rule_ids": [
+          "petitioner_legal_name_change_amendment"
+        ],
         "material": true,
         "primary_kind": "amendment_required"
       },
       "legal_basis": "AI-DRAFTED, ATTORNEY-PENDING. A petitioner legal-name change may require an amended petition or a successor-in-interest analysis. NUANCE: a pure name change with the same FEIN and unchanged terms may be only a notice.",
-      "attorney": ""
+      "attorney": "confirmed — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "confirmed",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16"
+      }
     },
     {
       "id": "employer-ein-change-amendment",
@@ -231,14 +419,26 @@
       "title": "Coverage — petitioner FEIN changed → amendment (successor-in-interest) [AI-drafted, pending]",
       "stage": "filed",
       "facts": [],
-      "change": { "predicate": "petitioner_ein", "old": "47-3829150", "new": "88-1234567" },
+      "change": {
+        "predicate": "petitioner_ein",
+        "old": "47-3829150",
+        "new": "88-1234567"
+      },
       "expect": {
-        "rule_ids": ["petitioner_ein_change_amendment"],
+        "rule_ids": [
+          "petitioner_ein_change_amendment"
+        ],
         "material": true,
         "primary_kind": "amendment_required"
       },
       "legal_basis": "AI-DRAFTED, ATTORNEY-PENDING. A FEIN change generally signals a different legal entity (successor-in-interest), which can require an amended petition. NUANCE: a corrected/typo'd EIN for the same entity is a consistency fix, not an amendment.",
-      "attorney": ""
+      "attorney": "approved with conditions — Licensed U.S. immigration attorney, 2026-06-16",
+      "attorney_review": {
+        "status": "approved_with_conditions",
+        "reviewer": "Licensed U.S. immigration attorney",
+        "date": "2026-06-16",
+        "note": "A new FEIN can mean a \"change of employer\" h1b filing rather than just a mere amendment"
+      }
     },
     {
       "id": "lca-number-correction-stale-fallback",
@@ -246,14 +446,24 @@
       "title": "Boundary — a schema-bound field with NO bespoke rule → reverse-index stale fallback",
       "stage": "filed",
       "facts": [],
-      "change": { "predicate": "lca_case_number", "old": "I-200-26273-558041", "new": "I-200-26273-558042" },
+      "change": {
+        "predicate": "lca_case_number",
+        "old": "I-200-26273-558041",
+        "new": "I-200-26273-558042"
+      },
       "expect": {
-        "rule_ids": ["reverse_index_stale"],
+        "rule_ids": [
+          "reverse_index_stale"
+        ],
         "material": false,
         "primary_kind": "stale"
       },
       "legal_basis": "Coverage check (no legal verdict): lca_case_number is bound to the I-129 schema but has no materiality rule, so a corrected case number must mark the form value stale rather than silently dropping it.",
-      "attorney": ""
+      "attorney": "n/a — engine-safety fixture",
+      "attorney_review": {
+        "status": "not_applicable",
+        "note": "engine-behavior fixture (not a legal rule)"
+      }
     },
     {
       "id": "unbound-field-noop",
@@ -261,12 +471,20 @@
       "title": "Negative — an unbound predicate produces NO impact (no false positive)",
       "stage": "intake",
       "facts": [],
-      "change": { "predicate": "favorite_color", "old": "blue", "new": "green" },
+      "change": {
+        "predicate": "favorite_color",
+        "old": "blue",
+        "new": "green"
+      },
       "expect": {
         "empty": true
       },
       "legal_basis": "Coverage check (no legal verdict): a field not bound to any form and with no rule must yield zero impact items — the engine never invents a consequence for an irrelevant change.",
-      "attorney": ""
+      "attorney": "n/a — engine-safety fixture",
+      "attorney_review": {
+        "status": "not_applicable",
+        "note": "engine-behavior fixture (not a legal rule)"
+      }
     }
   ]
 }

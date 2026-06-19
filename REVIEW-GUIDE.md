@@ -29,6 +29,14 @@ The PDFs are exactly what you'd review in practice — open them. **`ground-trut
 
 The five corpora are summarized in the [README](README.md#whats-in-the-box) and indexed in [`CASES.yaml`](CASES.yaml).
 
+### Current review status — where you're needed most
+
+This corpus has had a first attorney review (a licensed U.S. immigration attorney): **22 rules → 13 confirmed, 9 approved-with-conditions, 0 rejected.** Each case now carries an **`attorney_review`** block in its answer key with the status and the reviewer's note. The highest-value places to focus:
+
+- **`approved_with_conditions`** — directionally right, but a nuance was flagged that still needs encoding (the note is in the case). *Example:* `passport-expired-before-period` — the reviewer noted passport validity is judged **at filing**, not the start date, and near-expiry is a travel/CBP advisory, not a petition blocker. Do you agree, and how should we re-state it?
+- **`unreviewed`** — e.g. the document-integrity `mrz-checkdigit-corrupt` gate, not yet looked at.
+- **A second independent opinion** on the `confirmed` ones is always welcome.
+
 ---
 
 ## What to review (pick any one — all are useful)
