@@ -8,13 +8,23 @@ This `eval/` package turns the corpus into a runnable evaluation:
 |------|------|
 | `build_eval_tasks.py` | emits `eval_tasks.jsonl` — one **task + scoring oracle** per case |
 | `make_splits.py` + `splits/` | the deterministic **held-out split** (train / dev / test) |
+| `run_eval.py` | runs any OpenAI-compatible model over the tasks and strict-scores it |
 | this doc | the protocol an honest measurement must follow |
 
 ```sh
 python3 eval/make_splits.py          # (re)generate the split
 python3 eval/build_eval_tasks.py     # -> eval/eval_tasks.jsonl
 python3 eval/build_eval_tasks.py --split test   # the held-out test set only
+
+# run a model (or two, for the size delta) against the tasks:
+python3 eval/run_eval.py --endpoint http://HOST/v1 --model small-model --model large-model
 ```
+
+> **Reasoning models:** if your endpoint serves a thinking model, disable thinking for
+> a clean classification answer — a reasoning block otherwise blows the token budget and
+> the model never reaches its answer, which silently scores 0. `run_eval.py` sends
+> `chat_template_kwargs.enable_thinking=false` (the qwen3 switch) and parses an explicit
+> `ANSWER:` line for exactly this reason.
 
 ## What an agent does with a task
 
