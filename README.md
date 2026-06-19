@@ -103,9 +103,14 @@ pearson-demo-cases/
 ├── cases/            # the 5 case corpora (the data)
 ├── generator/        # reproducible synthetic-case generator
 ├── validator/        # validate.py — the stdlib reference validator
+├── eval/             # turn the corpus into agent-eval tasks + a held-out split
 ├── CASES.yaml        # manifest: personas, cases, gates, naming conventions
 └── cases/h1b-adversarial/VALIDATION-SPEC.md   # the gate catalog (the spec)
 ```
+
+### Using this as an agent benchmark
+
+`eval/` turns the cases into a computer-use evaluation: `build_eval_tasks.py` emits one **task + scoring oracle** per case, and `make_splits.py` produces a deterministic **held-out train/dev/test split** so you measure capability, not memorization. The scoring is strict (adversarial cases use *right-pass discipline* — the agent must surface *exactly* the named gate). See [`eval/EVAL-PROTOCOL.md`](eval/EVAL-PROTOCOL.md).
 
 ---
 

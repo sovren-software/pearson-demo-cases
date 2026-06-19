@@ -11,6 +11,9 @@ venv/
 **/.soffice-profile/
 *.tmp
 
+# Derived eval set — regenerate with `python3 eval/build_eval_tasks.py`
+eval/eval_tasks.jsonl
+
 # OS / editor
 .DS_Store
 *.swp

@@ -15,3 +15,7 @@ jobs:
           python-version: "3.x"
       - name: Run the reference validator (stdlib only — no deps)
         run: python3 validator/validate.py all
+      - name: Eval split is current
+        run: python3 eval/make_splits.py --check
+      - name: Eval tasks build
+        run: python3 eval/build_eval_tasks.py
