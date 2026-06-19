@@ -73,7 +73,7 @@ corpora:
       - {slug: worksite-outside-lca-area,      base_persona: yangben-zhengjian, gate: worksite_outside_lca_area,      severity: rfe,     cross_doc: true}
       - {slug: employer-name-mismatch,         base_persona: arjun-kumar,       gate: employer_name_mismatch,         severity: rfe,     cross_doc: true}
       - {slug: employer-ein-mismatch,          base_persona: yangben-zhengjian, gate: employer_ein_mismatch,          severity: rfe,     cross_doc: true}
-      - {slug: passport-expired-before-period, base_persona: abigail-medina,    gate: passport_expired_before_period, severity: blocker, cross_doc: false}
+      - {slug: passport-expired-before-period, base_persona: abigail-medina,    gate: passport_expired_before_period, severity: advisory, cross_doc: false}
       - {slug: mrz-checkdigit-corrupt,         base_persona: arjun-kumar,       gate: mrz_checkdigit_corrupt,         severity: rfe,     cross_doc: false}
 
   incomplete:

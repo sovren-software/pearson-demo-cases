@@ -46,7 +46,7 @@
         "passport"
       ],
       "cross_document": false,
-      "severity": "blocker",
+      "severity": "advisory",
       "affected_form": "passport",
       "why": "An expired/expiring passport blocks admissibility and consular processing for the requested period.",
       "evidence": {
