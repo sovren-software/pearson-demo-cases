@@ -11,6 +11,7 @@ naming:
   persona_slug: "given-family, kebab-case (e.g. arjun-kumar). The happy-path folder IS the slug."
   adversarial:  "folder name == the validation GATE it proves (kebab of the gate's snake_case name)."
   incomplete:   "folder name == the missing artifact (missing-<thing>)."
+  initial_intake: "folder name == fictional beneficiary + role; expected findings distinguish intake gaps from filing defects."
   fixtures:     "materiality & statusclock are a single cases.json keyed by rule/scenario id (no persona, no folders)."
   link:         "scenario corpora record their base persona in ground-truth.json -> base_persona; happy records -> persona."
 
@@ -86,6 +87,13 @@ corpora:
       - {slug: missing-i94,    base_persona: arjun-kumar,       gate: missing_required_document, severity: blocker, missing: "I-94 record"}
       - {slug: missing-wage,   base_persona: arjun-kumar,       gate: missing_required_field,    severity: rfe,     missing: "annualized salary on the offer"}
 
+  initial_intake:
+    dir: cases/h1b-initial-intake
+    proves: "workflow-stage-aware review — HR/FN source documents are present while legal-drafted filing artifacts are intentionally absent"
+    runner: "python validator/validate.py integrity"
+    cases:
+      - {slug: john-doe-indian-software-engineer, workflow_stage: initial_intake, severity_model: intake_stage_expected_findings}
+
   materiality:
     dir: cases/h1b-materiality
     file: cases.json
@@ -103,11 +111,15 @@ corpora:
     count: 5
     status: pending-attorney-validation   # answers hand-computed; re-surface to the design partner
 
-# ── Per-case document layout (happy / adversarial / incomplete) ─────────────────
+# ── Per-case document layout ────────────────────────────────────────────────────
 case_layout:
   required:  [passport.png, offer.pdf, lca.pdf, i94.pdf, degree.pdf, support-letter.pdf]
   answer_key: ground-truth.json   # expected facts; adversarial adds defect+expected_gates; incomplete adds documents_missing
   render_sources: _src/*.html     # diffable generator inputs the PDFs render from (a client never sends HTML)
   extras: "happy cases also carry over-shared docs (resume/paystub/etc.) marked required:false"
+  initial_intake:
+    upload_only: packet-for-lei-upload
+    do_not_upload: [attorney-only, ground-truth.json, case.json]
+    expected_absent_at_intake: [certified LCA, H-1B support letter, Form I-129, G-28]
 
 regenerate: "python3 generator/generate_cases.py   # needs: imagemagick, libreoffice, python3, Noto fonts"

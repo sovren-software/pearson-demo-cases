@@ -15,7 +15,8 @@
   "upload_folder": "packet-for-lei-upload",
   "do_not_upload": [
     "attorney-only",
-    "ground-truth.json"
+    "ground-truth.json",
+    "case.json"
   ],
   "test_objectives": [
     "Distinguish initial intake documents from legal-team-created filing documents",
@@ -23,5 +24,6 @@
     "Flag remote home office for LCA/worksite analysis",
     "Treat near-expiring passport as advisory/follow-up rather than automatic filing blocker",
     "Avoid overreacting to title and name-formatting differences"
-  ]
+  ],
+  "display_id": "LEI_CASE_001_JOHN_DOE"
 }

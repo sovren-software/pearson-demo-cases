@@ -69,6 +69,12 @@ CASES = os.path.join(REPO, "cases")
 HAPPY_REQUIRED = ["passport.png", "offer.pdf", "lca.pdf", "i94.pdf", "degree.pdf",
                   "support-letter.pdf", "ground-truth.json"]
 ADVERSARIAL_REQUIRED = ["passport.png", "offer.pdf", "lca.pdf", "ground-truth.json"]
+INTAKE_REQUIRED = ["README.md", "case.json", "ground-truth.json",
+                   "packet-for-lei-upload/LEI_CASE_001_JOHN_DOE_PACKET_COMBINED.pdf",
+                   "packet-for-lei-upload/README_FOR_LEI_UPLOAD.pdf",
+                   "attorney-only/ATTORNEY_ONLY_ANSWER_KEY.pdf"]
+INTAKE_FORBIDDEN_UPLOAD_NAMES = ("lca", "support-letter", "support_letter",
+                                 "i-129", "i129", "g-28", "g28")
 
 # Map a logical document "kind" to the file that would carry it. Used by the
 # incomplete tier to confirm a `documents_missing` entry is genuinely absent.
@@ -408,7 +414,7 @@ def compute_status_clock(periods: list[dict], travel: list[dict]) -> dict:
 
 
 # ===========================================================================
-# TIER 1 — Integrity (structural validity of all five corpora)
+# TIER 1 — Integrity (structural validity of all corpora)
 # ===========================================================================
 def check_integrity(res: Results) -> None:
     print("== integrity ==")
@@ -491,6 +497,58 @@ def check_integrity(res: Results) -> None:
             res.record("FAIL", name, f"base_persona '{persona}' does not resolve")
             continue
         res.record("PASS", name, "ground-truth+gates+persona OK")
+
+
+    # --- Initial intake: HR/FN upload packet exists, attorney-only answer key
+    #     is separated, and legal-drafted filing artifacts are not in the
+    #     upload folder because they are intentionally created after intake. ---
+    for d in case_dirs("h1b-initial-intake"):
+        slug = os.path.basename(d)
+        name = f"h1b-initial-intake/{slug}"
+        try:
+            case = load_json(os.path.join(d, "case.json"))
+            gt = load_json(os.path.join(d, "ground-truth.json"))
+        except (OSError, ValueError) as exc:
+            res.record("FAIL", name, f"metadata unreadable: {exc}")
+            continue
+        missing = [f for f in INTAKE_REQUIRED if not os.path.exists(os.path.join(d, f))]
+        if missing:
+            res.record("FAIL", name, f"missing required intake files: {missing}")
+            continue
+        if case.get("case_id") != gt.get("case_id"):
+            res.record("FAIL", name, "case.json and ground-truth.json case_id differ")
+            continue
+        if case.get("workflow_stage") != "initial_intake" or gt.get("workflow_stage") != "initial_intake":
+            res.record("FAIL", name, "workflow_stage must be initial_intake")
+            continue
+        if case.get("upload_folder") != "packet-for-lei-upload":
+            res.record("FAIL", name, "upload_folder must be packet-for-lei-upload")
+            continue
+        do_not_upload = set(case.get("do_not_upload") or [])
+        required_exclusions = {"attorney-only", "ground-truth.json", "case.json"}
+        if not required_exclusions.issubset(do_not_upload):
+            res.record("FAIL", name, f"do_not_upload missing {sorted(required_exclusions - do_not_upload)}")
+            continue
+        findings = gt.get("expected_findings") or []
+        finding_ids = {f.get("id") for f in findings}
+        required_findings = {
+            "lca_absent_initial_intake",
+            "support_letter_absent_initial_intake",
+            "remote_worksite_athens",
+            "passport_expires_soon",
+        }
+        if not required_findings.issubset(finding_ids):
+            res.record("FAIL", name, f"expected_findings missing {sorted(required_findings - finding_ids)}")
+            continue
+        upload_root = os.path.join(d, "packet-for-lei-upload")
+        uploaded_files = []
+        for root, _, files in os.walk(upload_root):
+            uploaded_files.extend(os.path.relpath(os.path.join(root, f), upload_root).lower() for f in files)
+        forbidden = [f for f in uploaded_files if any(token in f for token in INTAKE_FORBIDDEN_UPLOAD_NAMES)]
+        if forbidden:
+            res.record("FAIL", name, f"legal-drafted artifact appears in upload packet: {forbidden}")
+            continue
+        res.record("PASS", name, f"initial-intake metadata+upload boundary OK ({len(findings)} expected findings)")
 
     # --- Aggregate JSON corpora (materiality, statusclock): parse + non-empty. ---
     for fname in ("h1b-materiality/cases.json", "h1b-statusclock/cases.json"):

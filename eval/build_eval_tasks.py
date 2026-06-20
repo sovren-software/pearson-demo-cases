@@ -23,6 +23,9 @@ Scoring contract by corpus (the oracle):
   - adversarial : agent must surface EXACTLY the named gate and no sibling gate
                   ("right-pass discipline"). oracle.must_fire = the gate; oracle.exactly_one = true.
   - incomplete  : agent must report the missing document/field. oracle.missing_* = expected.
+  - initial_intake: agent must apply workflow-stage-aware review: expected-absent
+                    legal drafting artifacts are not defects, but intake facts still
+                    drive follow-up findings.
   - materiality : agent must classify the disposition. oracle.primary_kind + rule_ids + material.
   - statusclock : agent must compute the clock. oracle = the expected clock values.
   - happy       : agent must extract the case facts and fill the I-129. oracle = the fact blocks.
@@ -97,6 +100,24 @@ def build():
             oracle={"kind": "completeness", "gate": eg["gate"],
                     "missing_documents": d.get("documents_missing"),
                     "missing_kind": eg.get("missing_kind"), "missing_field": eg.get("missing_field")},
+            attorney_review=_ar(d)))
+
+    # initial intake — apply stage-aware review instead of filing-packet completeness
+    for slug, d in _doc_cases("h1b-initial-intake"):
+        findings = d.get("expected_findings") or []
+        tasks.append(dict(
+            id=f"h1b-initial-intake/{slug}", corpus="h1b-initial-intake", persona=None,
+            task="Ingest this initial H-1B intake packet and review it using the workflow "
+                 "stage. Do not treat legal-team-created documents such as the LCA or "
+                 "support letter as missing intake defects; surface the attorney-review "
+                 "and client/follow-up items supported by the HR and beneficiary materials.",
+            oracle={"kind": "initial_intake",
+                    "workflow_stage": d.get("workflow_stage"),
+                    "expected_findings": findings,
+                    "expected_absent_not_defects": [
+                        f.get("id") for f in findings
+                        if f.get("severity") == "no_issue_monitor" and "absent_initial_intake" in f.get("id", "")
+                    ]},
             attorney_review=_ar(d)))
 
     # materiality — classify the disposition of a change
