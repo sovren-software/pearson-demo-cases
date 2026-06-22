@@ -43,16 +43,34 @@
   },
   "extra_documents": [
     {
-      "file": "resume.pdf",
-      "kind": "resume",
+      "file": "g28.pdf",
+      "kind": "g28",
       "required": false,
-      "description": "Candidate résumé / CV (2 pages; over-shared, not required for I-129)"
+      "description": "Form G-28 — Notice of Entry of Appearance as Attorney (attorney of record)"
+    },
+    {
+      "file": "transcript.pdf",
+      "kind": "transcript",
+      "required": false,
+      "description": "Academic transcript (corroborates the degree exhibit)"
+    },
+    {
+      "file": "employer-bona-fides.pdf",
+      "kind": "employer-bona-fides",
+      "required": false,
+      "description": "Employer corporate & financial bona-fides / ability-to-pay statement"
     },
     {
       "file": "i797-prior.pdf",
       "kind": "i797-prior",
       "required": false,
       "description": "Prior I-797C H-1B approval notice (supports portability, not required)"
+    },
+    {
+      "file": "resume.pdf",
+      "kind": "resume",
+      "required": false,
+      "description": "Candidate résumé / CV (2 pages; over-shared, not required for I-129)"
     },
     {
       "file": "paystub.pdf",
@@ -64,5 +82,42 @@
   "prior_approval": {
     "receipt": "EAC2590012345",
     "prior_employer": "Meridian Software Corp"
-  }
+  },
+  "lca_facts": {
+    "lca_case_number": "I-200-26288-771902",
+    "prevailing_wage": 129355,
+    "full_time": true,
+    "hours_per_week": 40,
+    "soc_code": "15-1243"
+  },
+  "beneficiary_additional": {
+    "beneficiary_country_of_birth": "CHN",
+    "place_of_birth": "Guangzhou, China"
+  },
+  "petitioner_profile": {
+    "naics_code": "541715",
+    "year_established": 2014,
+    "num_employees": 240,
+    "gross_income": 86000000,
+    "net_income": 11200000,
+    "cap_status": "Cap-exempt — H-1B portability (beneficiary previously counted against the H-1B cap)"
+  },
+  "attorney": {
+    "name": "Jordan A. Whitfield, Esq.",
+    "firm": "Whitfield Immigration Law PLLC",
+    "bar_number": "WA-44182",
+    "bar_state": "Washington State Bar",
+    "address": "701 5th Avenue, Suite 4200, Seattle, WA 98104",
+    "phone": "+1 (206) 555-0188",
+    "email": "jwhitfield@whitfield-ilaw.example"
+  },
+  "prior_h_status": [
+    {
+      "status": "H-1B",
+      "employer": "Meridian Software Corp",
+      "valid_from": "2023-03-01",
+      "valid_to": "2026-02-28",
+      "receipt": "EAC2590012345"
+    }
+  ]
 }

@@ -536,15 +536,24 @@ def paystub_html(p: dict) -> str:  # recent pay stub from current payer
   <p class='meta'>YTD gross ${round(p['annual_wage_usd'] * 0.42):,}. Synthetic — not a real wage record.</p>""")
 
 
-def transcript_html(p: dict) -> str:  # academic transcript (abigail's foreign transcript)
+def transcript_html(p: dict) -> str:  # academic transcript (field-appropriate coursework)
     d = p["degree"]
     field = d["field"]
-    courses = [
-        ("Engineering Mathematics", "A"), ("Mechanics of Materials", "A-"),
-        ("Thermodynamics", "B+"), (f"{field} Design I", "A"),
-        (f"{field} Design II", "A-"), ("Finite Element Analysis", "A"),
-        ("Fluid Dynamics", "B+"), ("Capstone Project", "A"),
-    ]
+    fl = field.lower()
+    if any(k in fl for k in ("comput", "software", "electric", "data", "information")):
+        courses = [
+            ("Algorithms and Data Structures", "A"), ("Computer Architecture", "A-"),
+            ("Operating Systems", "B+"), ("Distributed Systems", "A"),
+            ("Database Systems", "A"), ("Machine Learning", "B+"),
+            (f"{field} Capstone", "A"), ("Software Engineering", "A-"),
+        ]
+    else:
+        courses = [
+            ("Engineering Mathematics", "A"), ("Mechanics of Materials", "A-"),
+            ("Thermodynamics", "B+"), (f"{field} Design I", "A"),
+            (f"{field} Design II", "A-"), ("Finite Element Analysis", "A"),
+            ("Fluid Dynamics", "B+"), ("Capstone Project", "A"),
+        ]
     rows = "".join(f"<tr><td class='k'>{c}</td><td>{g}</td></tr>" for c, g in courses)
     inst = d.get("institution", "University")
     return page(f"""
@@ -574,6 +583,55 @@ def tn_approval_html(p: dict) -> str:  # prior TN admission record (abigail)
   <p>Provided to evidence the beneficiary's current TN status preceding the H-1B change of status.</p>""")
 
 
+def g28_html(p: dict) -> str:  # Form G-28 — attorney of record (part of the filing packet)
+    a = p.get("attorney", {})
+    e = p["employer"]
+    return page(f"""
+  <h1>Form G-28 — Notice of Entry of Appearance as Attorney or Accredited Representative</h1>
+  <p class='meta'>U.S. Department of Homeland Security &middot; USCIS</p><hr>
+  <p><b>Part 1. Information About Attorney or Accredited Representative.</b></p>
+  <table>
+    <tr><td class='k'>Name of Attorney</td><td><b>{a.get('name', '')}</b></td></tr>
+    <tr><td class='k'>Law Firm / Organization</td><td>{a.get('firm', '')}</td></tr>
+    <tr><td class='k'>State Bar Number</td><td>{a.get('bar_number', '')}</td></tr>
+    <tr><td class='k'>Licensing Authority (State Bar)</td><td>{a.get('bar_state', '')}</td></tr>
+    <tr><td class='k'>Address</td><td>{a.get('address', '')}</td></tr>
+    <tr><td class='k'>Telephone / Email</td><td>{a.get('phone', '')} &middot; {a.get('email', '')}</td></tr>
+  </table>
+  <p><b>Part 2. Eligibility.</b> I am an attorney in good standing, admitted to practice and not
+     subject to any order restricting my practice before USCIS.</p>
+  <p><b>Part 3. Appearance.</b> I enter my appearance as attorney of record for the petitioner
+     <b>{e['name']}</b> in connection with the Form I-129 H-1B petition for the beneficiary
+     <b>{p['given'].title()} {p['surname'].title()}</b>.</p>
+  <p class='sig'>Signature of Attorney<br><br>{a.get('name', '')}<br>{a.get('firm', '')}</p>
+  <p class='stamp'>ATTORNEY OF RECORD &middot; G-28</p>""")
+
+
+def employer_bona_fides_html(p: dict) -> str:  # corporate + financial bona-fides (ability to pay)
+    e = p["employer"]
+    prof = p.get("petitioner_profile", {})
+    return page(f"""
+  <h1>{e['name']} — Employer Profile &amp; Ability-to-Pay Statement</h1>
+  <p class='meta'>{e['address']} &middot; FEIN {e['ein']}</p><hr>
+  <p>This statement and the attached corporate records are submitted in support of the H-1B petition
+     filed by {e['name']} (the &ldquo;Petitioner&rdquo;) to establish the Petitioner's bona fides as a
+     U.S. employer and its continuing ability to pay the proffered wage.</p>
+  <table>
+    <tr><td class='k'>Legal Entity Name</td><td><b>{e['name']}</b></td></tr>
+    <tr><td class='k'>Federal Employer Identification No. (FEIN)</td><td>{e['ein']}</td></tr>
+    <tr><td class='k'>Principal Business Address</td><td>{e['address']}</td></tr>
+    <tr><td class='k'>NAICS Code</td><td>{prof.get('naics_code', '')}</td></tr>
+    <tr><td class='k'>Year Established</td><td>{prof.get('year_established', '')}</td></tr>
+    <tr><td class='k'>Total U.S. Employees</td><td>{prof.get('num_employees', '')}</td></tr>
+    <tr><td class='k'>Gross Annual Revenue</td><td>${prof.get('gross_income', 0):,}</td></tr>
+    <tr><td class='k'>Net Annual Income</td><td>${prof.get('net_income', 0):,}</td></tr>
+    <tr><td class='k'>Proffered Wage (this petition)</td><td>${p['annual_wage_usd']:,} per year</td></tr>
+  </table>
+  <p>The Petitioner's net annual income and cash position substantially exceed the proffered wage,
+     establishing the ability to pay the beneficiary from the date of filing.</p>
+  <p class='stamp'>EMPLOYER BONA FIDES &middot; ABILITY TO PAY</p>""")
+
+
 # extra-doc dispatch: key → (renderer, human label for ground-truth)
 EXTRA_RENDERERS = {
     "resume": resume_html,
@@ -582,14 +640,18 @@ EXTRA_RENDERERS = {
     "paystub": paystub_html,
     "transcript": transcript_html,
     "tn-approval": tn_approval_html,
+    "g28": g28_html,
+    "employer-bona-fides": employer_bona_fides_html,
 }
 EXTRA_LABELS = {
     "resume": "Candidate résumé / CV (2 pages; over-shared, not required for I-129)",
     "i20": "Form I-20 / OPT student record (status history, not required)",
     "i797-prior": "Prior I-797C H-1B approval notice (supports portability, not required)",
     "paystub": "Recent pay stub from current employer (over-shared, not required)",
-    "transcript": "Academic transcript (over-shared alongside the degree, not required)",
+    "transcript": "Academic transcript (corroborates the degree exhibit)",
     "tn-approval": "Prior TN admission record (status history, not required)",
+    "g28": "Form G-28 — Notice of Entry of Appearance as Attorney (attorney of record)",
+    "employer-bona-fides": "Employer corporate & financial bona-fides / ability-to-pay statement",
 }
 
 
@@ -645,7 +707,25 @@ PROFILES = [
                      "signer": "Marta Ruiz", "signer_title": "Director of Talent"},
         "worksite_address": "2200 6th Avenue, Seattle, WA 98121",
         "prior_approval": {"receipt": "EAC2590012345", "prior_employer": "Meridian Software Corp"},
-        "extras": ["resume", "i797-prior", "paystub"],
+        "attorney": {
+            "name": "Jordan A. Whitfield, Esq.",
+            "firm": "Whitfield Immigration Law PLLC",
+            "bar_number": "WA-44182", "bar_state": "Washington State Bar",
+            "address": "701 5th Avenue, Suite 4200, Seattle, WA 98104",
+            "phone": "+1 (206) 555-0188", "email": "jwhitfield@whitfield-ilaw.example",
+        },
+        "petitioner_profile": {
+            "naics_code": "541715", "year_established": 2014, "num_employees": 240,
+            "gross_income": 86000000, "net_income": 11200000,
+        },
+        "cap_status": "Cap-exempt — H-1B portability (beneficiary previously counted against the H-1B cap)",
+        "hours_per_week": 40, "full_time": True,
+        "prior_h_status": [
+            {"status": "H-1B", "employer": "Meridian Software Corp",
+             "valid_from": "2023-03-01", "valid_to": "2026-02-28", "receipt": "EAC2590012345"}
+        ],
+        "full_petition": True,
+        "extras": ["g28", "transcript", "employer-bona-fides", "i797-prior", "resume", "paystub"],
         "scenario": "H-1B transfer / portability (currently in H-1B with another employer).",
         "material_change": {
             "type": "worksite",
@@ -734,6 +814,29 @@ def ground_truth(p: dict) -> dict:
         gt["dependents"] = p["dependents"]
     if p.get("prior_approval"):
         gt["prior_approval"] = p["prior_approval"]
+    # 10/10 petition-completeness facts (present on a fully-built reference packet like
+    # the Yangben case). Gated on `full_petition` so partial cases stay minimal; every
+    # value is sourced from a document in the case folder (LCA, G-28, employer-bona-fides,
+    # passport, prior I-797) so the answer key stays an honest oracle.
+    if p.get("full_petition"):
+        gt["lca_facts"] = {
+            "lca_case_number": p["lca_case_number"],
+            "prevailing_wage": p["prevailing_wage"],
+            "full_time": p.get("full_time", True),
+            "hours_per_week": p.get("hours_per_week", 40),
+            "soc_code": p["soc_code"],
+        }
+        gt["beneficiary_additional"] = {
+            "beneficiary_country_of_birth": p.get("country_of_birth", p["nationality"]),
+            "place_of_birth": p.get("place_of_birth"),
+        }
+        if p.get("petitioner_profile"):
+            gt["petitioner_profile"] = {**p["petitioner_profile"],
+                                        "cap_status": p.get("cap_status")}
+        if p.get("attorney"):
+            gt["attorney"] = p["attorney"]
+        if p.get("prior_h_status"):
+            gt["prior_h_status"] = p["prior_h_status"]
     return gt
 
 
@@ -1184,8 +1287,14 @@ def main():
         build_incomplete()
         return
     if extras_only:
-        print("\n=== extras-only (over-shared 'too-much' docs) ===")
+        # `--only <slug>` scopes the regen to one case (clean diff; no timestamp churn
+        # on the other cases' PDFs).
+        only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
+        print(f"\n=== extras-only (over-shared 'too-much' docs)"
+              f"{f' · only {only}' if only else ''} ===")
         for p in PROFILES:
+            if only and p["slug"] != only:
+                continue
             p["_mrz"] = build_mrz(p)  # ground_truth() references the MRZ
             d = os.path.join(OUT_ROOT, p["slug"])
             if not os.path.isdir(d):
