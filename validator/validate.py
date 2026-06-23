@@ -727,12 +727,16 @@ def check_materiality(res: Results) -> None:
             continue
 
         # Internal consistency: a 'stale' verdict is by definition not material;
-        # an 'amendment_required' verdict is material.
+        # an 'amendment_required' verdict is material; an 'advisory' ("it depends")
+        # is a judgment call the engine never auto-asserts as material.
         if pk == "stale" and expect["material"] is True:
             res.record("FAIL", name, "primary_kind 'stale' but material=true (inconsistent)")
             continue
         if pk == "amendment_required" and expect["material"] is False:
             res.record("FAIL", name, "primary_kind 'amendment_required' but material=false")
+            continue
+        if pk == "advisory" and expect["material"] is True:
+            res.record("FAIL", name, "primary_kind 'advisory' but material=true (an 'it depends' is never auto-material)")
             continue
 
         # forbid_rule_ids, when present, must be disjoint from rule_ids.
