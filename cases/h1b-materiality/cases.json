@@ -4,7 +4,8 @@
     "amendment_required": "amended I-129 generally required before the change takes effect (material)",
     "notice_obligation": "a filing obligation that does NOT amend the petition (e.g. AR-11)",
     "stale": "the petition copy should be updated, not necessarily re-filed (not material)",
-    "constraint_violated": "a cross-document inconsistency the change causes (RFE/denial/blocker)"
+    "constraint_violated": "a cross-document inconsistency the change causes (RFE/denial/blocker)",
+    "advisory": "an \"it depends\" judgment call surfaced for the attorney to DECIDE — not a hard verdict the engine asserts; never material until the attorney decides per case"
   },
   "cases": [
     {
@@ -72,7 +73,7 @@
     {
       "id": "title-change-post-filing-amendment",
       "rule": 3,
-      "title": "Title changes AFTER filing → amendment (specialty-occupation basis)",
+      "title": "Title changes AFTER filing → advisory \"it depends\" (material only if duties or SOC change; an inline promotion may not require an amendment)",
       "stage": "filed",
       "facts": [],
       "change": {
@@ -84,10 +85,10 @@
         "rule_ids": [
           "title_change_post_filing_amendment"
         ],
-        "material": true,
-        "primary_kind": "amendment_required"
+        "material": false,
+        "primary_kind": "advisory"
       },
-      "legal_basis": "8 CFR 214.2(h)(2)(i)(E) + Matter of Simeio line on material changes — a post-filing change in position can alter the specialty-occupation basis and generally requires an amended petition before it takes effect.",
+      "legal_basis": "8 CFR 214.2(h)(2)(i)(E) (material change). A post-filing title change requires an amended petition ONLY if the duties are materially different or the SOC code changes; an inline promotion (same SOC, mostly a pay increase, minimal new duties) may not require an amendment — surfaced as an attorney-decides advisory rather than an automatic amendment. Attorney redline — Heba Alhassan 2026-06-16 / 06-22.",
       "attorney": "approved with conditions — Licensed U.S. immigration attorney, 2026-06-16",
       "attorney_review": {
         "status": "approved_with_conditions",
@@ -159,7 +160,7 @@
     {
       "id": "worksite-within-area-stale",
       "rule": 6,
-      "title": "Worksite moves WITHIN the LCA area → stale (suite/formatting change)",
+      "title": "Worksite moves WITHIN the LCA area → advisory \"it depends\" (re-post the LCA or not is firm-dependent — flag for review)",
       "stage": "filed",
       "facts": [
         {
@@ -181,9 +182,9 @@
           "worksite_outside_lca_new_lca"
         ],
         "material": false,
-        "primary_kind": "stale"
+        "primary_kind": "advisory"
       },
-      "legal_basis": "Within the certified area of intended employment — confirm it still falls inside the area; a formatting/suite change updates the petition but does not amend it.",
+      "legal_basis": "Within the certified area of intended employment. A within-area worksite move updates the petition; whether to re-post the certified LCA for the new address is firm-dependent (some re-post, some don't) — surfaced as an attorney-decides advisory rather than a fixed verdict. Attorney redline — Heba Alhassan 2026-06-16 / 06-22.",
       "attorney": "approved with conditions — Licensed U.S. immigration attorney, 2026-06-16",
       "attorney_review": {
         "status": "approved_with_conditions",
