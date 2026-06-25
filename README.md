@@ -103,6 +103,7 @@ The generator computes valid ICAO-9303 MRZ check digits, renders country-styled 
 pearson-demo-cases/
 ├── cases/            # the 5 case corpora (the data)
 ├── generator/        # reproducible synthetic-case generator
+│   └── synthetic-passports/   # standalone passport test-doc generator: 10 countries, synthetic + adapt-real paths, controlled variations
 ├── validator/        # validate.py — the stdlib reference validator
 ├── eval/             # turn the corpus into agent-eval tasks + a held-out split
 ├── CASES.yaml        # manifest: personas, cases, gates, naming conventions

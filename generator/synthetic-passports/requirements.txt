@@ -1,0 +1,5 @@
+# Synthetic passport generator dependencies.
+# Pillow MUST be built with raqm (libraqm) for Devanagari/Urdu complex-script shaping:
+#   python3 -c "from PIL import features; print(features.check('raqm'))"   # -> True
+Pillow>=10.0
+numpy>=1.24

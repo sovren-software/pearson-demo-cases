@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+_smoke/
+_smoke2/
+# Regenerable bulk outputs (recreate with `synth_passports.py sample` / `adapt_passports.py`)
+out/
+out_adapt/
+# downloaded reference base images (fetch from the URLs in REFERENCES.md)
+refs/
