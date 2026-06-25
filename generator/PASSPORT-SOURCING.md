@@ -75,3 +75,15 @@ Wikimedia Commons `Category:Passport_data_pages` · ICAO Doc 9303 Part 3 ·
 MIDV-2020 (arxiv 2107.00396) · SIDTD (Nature s41597-024-04160-9) · SynthMRZ
 (github.com/tony-xlh/SynthMRZ, dynamsoft.com SynthMRZ) · `mrz` PyPI · ICAO-9303
 check digits (idcheck.dev/icao-9303-check-digits).
+
+## 2026-06-25 — 10-country sourcing pass (for `synthetic-passports/`)
+
+A license-verified per-country base catalog now lives in
+[`synthetic-passports/REFERENCES.md`](synthetic-passports/REFERENCES.md) (the
+H-1B-weighted set: IND, CHN, CAN, KOR, PHL, TWN, MEX, BRA, GBR, PAK). Key findings:
+
+- **Canada** — **no** permissively-licensed data page exists (Crown copyright to 2074) → must be **fully synthetic**.
+- **United Kingdom** — only the **pre-2020 burgundy specimen** is reusable (CC BY-SA). The **current blue (2020+)** passport is Crown copyright and the Open Government Licence v3.0 *explicitly excludes* "identity documents such as the British Passport" → current-gen must be synthetic.
+- **China** — a **public-domain** (PRC-exempt), 3070×4296 "Interior of PRC Biometric passport" is a cleaner, higher-res base than the CC BY-SA 2014 page this doc originally cited.
+- **Mexico** — correction: the CC0 biometric sheet has **no MRZ** in the source image (this doc previously implied one); the generator renders Mexico's MRZ synthetically anyway.
+- **License hygiene** — roughly half the good bases are **CC BY-SA** (share-alike): any derived SPECIMEN image must carry attribution + a "changes made" note. The adapt path records `base_reference` (license/attribution/source_url) in each JSON sidecar.
